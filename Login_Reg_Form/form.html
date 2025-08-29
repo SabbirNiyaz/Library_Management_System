@@ -17,26 +17,95 @@
                     <input type="password" name="password" placeholder="Password" required>
                     <button type="submit" name="login">Login</button>
                     <p>Don't have an account? <a href="#" onclick="showRegisterForm()">Register</a></p>
+                    <div>
+                    <p id="forgotPassword"><a href="#">Forgot Password?</a></p>
+                    </div>
                 </form>  
             </div>
 
             <!-- Register Form -->
+
             <div class="form-box" id="register-form" style="display: none;">
                 <h2>📚 Library Management System</h2>
                 <h3>Register</h3>
-                <input type="name" name="name" placeholder="Name" required>
-                <input type="email" name="email" placeholder="Email" required>
-                <input type="password" name="password" placeholder="Password" required>
-                <select name="role" required>
+                <input type="name" name="name" id="name" placeholder="Name" required>
+                <div class="error" id="nameError">Error</div>
+                <input type="email" name="email" id="email" placeholder="Email" required>
+                <div class="error" id="emailError"></div>
+                <input type="password" name="password" id="password" placeholder="Password" required>
+                <div class="error" id="passwordError"></div>
+                <select name="role" id="role" required>
                     <option value="">Select Role</option>
                     <option value="user">User</option>
                     <option value="librarian">Librarian</option>
                     <option value="admin">Admin</option>
                 </select>
+                <div class="error" id="roleError"></div>
                 <button type="submit" name="register">Register</button>
                 <p>Already have an account? <a href="#" onclick="showLoginForm()">Login</a></p>
             </div>
         </div>
+
+</style>
+
+<script>
+document.getElementById('register-form').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent form submission for validation
+
+    // Clear previous errors
+    document.getElementById('nameError').innerText = '';
+    document.getElementById('emailError').innerText = '';
+    document.getElementById('passwordError').innerText = '';
+    document.getElementById('roleError').innerText = '';
+
+    // Get input values
+    let name = document.getElementById('name').value.trim();
+    let email = document.getElementById('email').value.trim();
+    let password = document.getElementById('password').value.trim();
+    let role = document.getElementById('role').value;
+
+    let isValid = true;
+
+    // Name validation
+    if (name === "") {
+        document.getElementById('nameError').innerText = 'Name cannot be empty.';
+        isValid = false;
+    } else if (!/^[a-zA-Z ]{2,}$/.test(name)) {
+        document.getElementById('nameError').innerText = 'Please enter a valid name (at least 2 letters).';
+        isValid = false;
+    }
+
+    // Email validation
+    if (email === "") {
+        document.getElementById('emailError').innerText = 'Email cannot be empty.';
+        isValid = false;
+    } else if (!/^\S+@\S+\.\S+$/.test(email)) {
+        document.getElementById('emailError').innerText = 'Please enter a valid email address.';
+        isValid = false;
+    }
+
+    // Password validation
+    if (password === "") {
+        document.getElementById('passwordError').innerText = 'Password cannot be empty.';
+        isValid = false;
+    } else if (password.length < 6) {
+        document.getElementById('passwordError').innerText = 'Password must be at least 6 characters long.';
+        isValid = false;
+    }
+
+    // Role validation
+    if (role === "") {
+        document.getElementById('roleError').innerText = 'Please select a role.';
+        isValid = false;
+    }
+
+    // Submit if valid
+    if (isValid) {
+        alert('Registration successful!');
+        this.submit();
+    }
+});
+</script>
 
         <script src="formScripts.js"></script>
     </body>

@@ -12,3 +12,4 @@ function showLoginForm() {
     registerForm.style.display = "none";
     loginForm.style.display = "block";
 }
+
