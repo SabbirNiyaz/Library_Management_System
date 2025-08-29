@@ -157,5 +157,6 @@ span {
 .error {
     color: red;
     font-size: 14px;
-    margin: 0px 0px 0px 12px;
+    margin: 0px 0px 0px 5px;
+    display: block;
 }
