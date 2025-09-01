@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Librarian Dashboard - Library Management System</title>
+    <link rel="stylesheet" href="libPortalStyle.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <h2>📚 Library Management System</h2>
+                <p>Librarian Portal</p>
+            </div>
+            <div class="librarian-info">
+                <div class="librarian-avatar">JD</div>
+                <div>
+                    <strong>Name</strong><br>
+                    <small>Senior Librarian</small>
+                </div>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </div>
+
+        <!-- Stats Overview -->
+        <div class="stats-grid">
+            <div class="stat-card books">
+                <div class="stat-number" id="totalBooks">1,000</div>
+                <div class="stat-label">Total Books</div>
+            </div>
+            <div class="stat-card issued">
+                <div class="stat-number" id="booksIssued">100</div>
+                <div class="stat-label">Books Issued</div>
+            </div>
+            <div class="stat-card overdue">
+                <div class="stat-number" id="overdueBooks">10</div>
+                <div class="stat-label">Overdue Books</div>
+            </div>
+            <div class="stat-card returned">
+                <div class="stat-number" id="todayReturns">10</div>
+                <div class="stat-label">Today's Returns</div>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('circulation')">🏠 Home</button>
+            <button class="nav-tab" onclick="showSection('books')">📚 Manage Books</button>
+            <button class="nav-tab" onclick="showSection('overdue')">👥 Manage Users</button>
+            <button class="nav-tab" onclick="showSection('reports')">⚙️ Settings</button>
+        </div>
+
+        <!-- Circulation Section -->
+        <div id="circulation" class="content-section active">
+            <!-- ... (your existing code for circulation section) ... -->
+            
+        </div>
+
+        <!-- Books Management Section -->
+        <div id="books" class="content-section">
+            <!-- ... (your existing code for books management section) ... -->
+        </div>
+
+        <!-- Overdue & Fines Section -->
+        <div id="overdue" class="content-section">
+            <!-- ... (your existing code for overdue & fines section) ... -->
+        </div>
+
+        <!-- Reports Section -->
+        <div id="reports" class="content-section">
+            <!-- ... (your existing code for reports section) ... -->
+        </div>
+    </div>
+
+    <!-- Add Book Modal -->
+    <div id="addBookModal" class="modal">
+        <!-- ... (your existing code for add book modal) ... -->
+    </div>
+
+    <!-- Scripts -->
+    <script src="libPortalScript.js"></script>
+</body>
+</html>
