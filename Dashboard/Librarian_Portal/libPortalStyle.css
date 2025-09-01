@@ -20,7 +20,7 @@
         .header {
             background: white;
             padding: 20px 30px;
-            border-radius: 10px;
+            border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             margin-bottom: 30px;
             display: flex;
@@ -81,16 +81,16 @@
         .stat-card {
             background: white;
             padding: 25px;
-            border-radius: 10px;
+            border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             text-align: center;
             border-left: 4px solid;
         }
 
         .stat-card.books { border-left-color: #28a745; }
-        .stat-card.issued { border-left-color: #007bff; }
-        .stat-card.overdue { border-left-color: #dc3545; }
-        .stat-card.returned { border-left-color: #ffc107; }
+        .stat-card.issued { border-left-color: #ffc107; }
+        .stat-card.manageUsers { border-left-color: #007bff; }
+        .stat-card.returned { border-left-color: #dc3545; }
 
         .stat-number {
             font-size: 36px;
@@ -137,7 +137,7 @@
         /* Content Sections */
         .content-section {
             background: white;
-            border-radius: 10px;
+            border-radius: 8px;
             padding: 30px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             margin-bottom: 30px;
@@ -202,6 +202,7 @@
             outline: none;
             border-color: #28a745;
             box-shadow: 0 0 0 2px rgba(40,167,69,0.25);
+            transition: all 0.5s ease;
         }
 
         /* Tables */
@@ -298,7 +299,7 @@
 
         .status-available { background: #d4edda; color: #155724; }
         .status-issued { background: #d1ecf1; color: #0c5460; }
-        .status-overdue { background: #f8d7da; color: #721c24; }
+        .status-manageUsers { background: #f8d7da; color: #721c24; }
         .status-returned { background: #fff3cd; color: #856404; }
 
         /* Issue/Return Section */
@@ -351,7 +352,7 @@
             background: white;
             margin: 5% auto;
             padding: 30px;
-            border-radius: 10px;
+            border-radius: 8px;
             width: 90%;
             max-width: 600px;
             position: relative;

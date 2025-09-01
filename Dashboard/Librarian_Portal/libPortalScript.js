@@ -45,7 +45,7 @@
         function exportBooks() {
             alert('Export inventory functionality not implemented.');
         }
-        function sendOverdueReminders() {
+        function manageUsersReminders() {
             alert('Reminders sent!');
         }
         function collectFine() {
