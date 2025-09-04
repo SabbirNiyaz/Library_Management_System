@@ -1,22 +1,42 @@
+<?php
+
+session_start();
+$errors = [
+    'login' => $_SESSION['login_error'] ?? '',
+    'register' => $_SESSION['register_error'] ?? ''
+];
+$activeForm = $_SESSION['active_form'] ?? 'login';
+
+session_unset();
+
+function showForm($error) {
+    return !empty($error) ? "<p class='error-message'>$error</p>" : '';
+}
+
+function showActiveForm($formName, $activeForm) {
+    return $formName === $activeForm ? 'active' : '';
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login-Register</title>
-    <!-- <link rel="stylesheet" href="autFormStyles.css"> -->
-     <link rel="stylesheet" href="/views/assets/css/auth-style/login-Register-Form.css">
+      <link rel="stylesheet" href="../assets/css/auth-Style/login-Register-Form.css">
 </head>
 <body>
     <div class="container">
         <!-- Login Form -->
-        <div class="form-box" id="login-form">
-            <form id="loginForm" action="" method="post" autocomplete="off" novalidate>
+        <div class="form-box <?= showActiveForm('login', $activeForm); ?>" id="login-form">
+            <form id="loginForm" action="login-Register.php" method="post" autocomplete="off" novalidate>
                 <h2>📚 Library Management System</h2>
                 <h3>Login</h3>
-                <input type="email" name="loginEmail" id="loginEmail" placeholder="Email" required>
+                <?= showForm($errors['login']); ?>
+                <input type="email" name="email" id="loginEmail" placeholder="Email" required>
                 <div class="error" id="loginEmailError"></div>
-                <input type="password" name="loginPassword" id="loginPassword" placeholder="Password" required>
+                <input type="password" name="password" id="loginPassword" placeholder="Password" required>
                 <div class="error" id="loginPasswordError"></div>
                 <button type="submit" name="login">Login</button>
                 <p>Don't have an account? <a href="#" onclick="showRegisterForm()">Register</a></p>
@@ -27,10 +47,11 @@
         </div>
 
         <!-- Register Form -->
-        <div class="form-box" id="register-form" style="display: none;">
-            <form id="registerForm" action="" method="post" autocomplete="off" novalidate>
+        <div class="form-box <?= showActiveForm('register', $activeForm); ?>" id="register-form" style="display: none;">
+            <form id="registerForm" action="login-Register.php" method="post" autocomplete="off" novalidate>
                 <h2>📚 Library Management System</h2>
                 <h3>Register</h3>
+                <?= showForm($errors['register']); ?>
                 <input type="text" name="name" id="name" placeholder="Name" required>
                 <div class="error" id="nameError"></div>
                 <input type="email" name="email" id="email" placeholder="Email" required>
@@ -49,6 +70,7 @@
             </form>
         </div>
     </div>
-    <script src="/views/assets/app/auth-Script/login-Register-Form.js"></script>
+    <!-- <script src="/views/assets/app/auth-Script/login-Register-Form.js"></script> -->
+     <script src="../assets/app/auth-Script/login-Register-Form.js"></script>
 </body>
 </html>
