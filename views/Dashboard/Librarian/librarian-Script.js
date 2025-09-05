@@ -24,46 +24,286 @@
             // Redirect or perform logout logic here
         }
 
-        // Dummy functions for buttons
-        function lookupStudent() {
-            document.getElementById('studentInfo').style.display = 'block';
-            document.getElementById('studentInfo').innerHTML = '<strong>Student Name:</strong> Jane Smith<br><strong>Class:</strong> 10A';
-        }
-        function issueBook() {
-            alert('Book issued!');
-        }
-        function returnBook() {
-            alert('Book returned!');
-        }
-        function viewStudentBooks() {
-            document.getElementById('returnInfo').style.display = 'block';
-            document.getElementById('returnInfo').innerHTML = '<strong>Books Issued:</strong> 2<br><strong>Due Date:</strong> 2024-06-15';
-        }
-        function importBooks() {
-            alert('Import books functionality not implemented.');
-        }
-        function exportBooks() {
-            alert('Export inventory functionality not implemented.');
-        }
-        function manageUsersReminders() {
-            alert('Reminders sent!');
-        }
-        function collectFine() {
-            alert('Fine collected!');
-        }
-        function generateFineReport() {
-            alert('Fine report generated!');
-        }
-        function generateReport(type) {
-            alert('Report generated: ' + type);
-        }
+        // Edit Profile Modal
+       
+// // Function to clear all error messages
+// function clearAllErrorMessages() {
+//    // Clear errors from Edit Profile form
+//    document.getElementById('nameError').innerText = ''
+//    document.getElementById('oldPasswordError').innerText = ''
+//    document.getElementById('newPasswordError').innerText = ''
+//    document.getElemen tById('confirmPasswordError').innerText = ''
+   
+//    // Clear errors from Change Name form
+//    document.getElementById('newNameError').innerText = ''
+   
+//    // Clear errors from Reset Password form
+//    document.getElementById('currentPasswordError').innerText = ''
+//    document.getElementById('resetConfirmPasswordError').innerText = ''
+// }
 
-        // Add Book Form Submission
-        document.getElementById('addBookForm').onsubmit = function(e) {
-            e.preventDefault();
-            alert('Book added!');
-            closeModal('addBookModal');
-        };
+// // Update Profile Functionality
+// document
+//    .getElementById('updateProfileForm')
+//    .addEventListener('submit', function (e) {
+//       e.preventDefault()
+
+//       // Clear previous errors
+//       const nameError = document.getElementById('nameError')
+//       nameError.innerText = ''
+//       const oldPasswordError = document.getElementById('oldPasswordError')
+//       oldPasswordError.innerText = ''
+//       const newPasswordError = document.getElementById('newPasswordError')
+//       newPasswordError.innerText = ''
+//       const confirmPasswordError = document.getElementById('confirmPasswordError')
+//       confirmPasswordError.innerText = ''
+
+//       // Get input values
+//       let name = document.getElementById('name').value.trim()
+//       let oldPassword = document.getElementById('oldPassword').value
+//       let newPassword = document.getElementById('newPassword').value
+//       let confirmPassword = document.getElementById('confirmPassword').value
+//       let isValid = true
+
+//       // Name validation
+//       if (name === "") {
+//          nameError.innerText = '*Name cannot be empty.'
+//          isValid = false
+//       } else if (!/^[a-zA-Z\s]{2,}$/.test(name)) {
+//          nameError.innerText = '*Please enter a valid name (at least 2 letters, letters and spaces only).'
+//          isValid = false
+//       }
+
+//       // Old Password validation
+//       if (oldPassword === "") {
+//          oldPasswordError.innerText = '*Old password cannot be empty.'
+//          isValid = false
+//       }
+
+//       // New Password validation
+//       if (newPassword === "") {
+//          newPasswordError.innerText = '*New password cannot be empty.'
+//          isValid = false
+//       } else if (newPassword.length < 6) {
+//          newPasswordError.innerText = '*Password must be at least 6 characters long.'
+//          isValid = false
+//       } else if (!/[A-Z]/.test(newPassword) || !/[a-z]/.test(newPassword) || !/[0-9]/.test(newPassword) || !/[\W_]/.test(newPassword)) {
+//          newPasswordError.innerText = '*Password must contain uppercase, lowercase, digit, and special character.'
+//          isValid = false
+//       }
+
+//       // Confirm Password validation
+//       if (confirmPassword === "") {
+//          confirmPasswordError.innerText = '*Please confirm your password.'
+//          isValid = false
+//       } else if (newPassword !== confirmPassword) {
+//          confirmPasswordError.innerText = '*Passwords do not match.'
+//          isValid = false
+//       }
+
+//       // Check if new password is same as old password
+//       if (oldPassword === newPassword && oldPassword !== "") {
+//          newPasswordError.innerText = '*New password must be different from old password.'
+//          isValid = false
+//       }
+
+//       if (isValid) {
+//          // Update profile name in the view
+//          document.querySelector('.profile-name').textContent = name
+
+//          console.log('Updated Profile:', {
+//             name,
+//             oldPassword,
+//             newPassword,
+//             confirmPassword,
+//          })
+
+//          // Show success notification
+//          showNotification('Profile updated successfully!', 'success')
+
+//          // Clear form
+//          this.reset()
+
+//          // Go back to profile
+//          setTimeout(() => {
+//             backToProfile()
+//          }, 1500)
+//       }
+//    })
+
+// // Change Name Form Functionality
+// document
+//    .getElementById('changeNameForm')
+//    .addEventListener('submit', function (e) {
+//       e.preventDefault()
+
+//       // Clear previous errors
+//       const newNameError = document.getElementById('newNameError')
+//       newNameError.innerText = ''
+//       // Note: There's no passwordError element in changeName form, so removing that line
+
+//       // Get input values
+//       let newName = document.getElementById('newName').value.trim()
+//       let password = document.getElementById('password').value
+//       let isValid = true
+
+//       // Name validation
+//       if (newName === "") {
+//          newNameError.innerText = '*Name cannot be empty.'
+//          isValid = false
+//       } else if (!/^[a-zA-Z\s]{2,}$/.test(newName)) {
+//          newNameError.innerText = '*Please enter a valid name (at least 2 letters, letters and spaces only).'
+//          isValid = false
+//       }
+
+//       // Password validation - Note: No error element exists for password in changeName form
+
+//       if (password === "") {
+//          passwordError.innerText = '*Password cannot be empty.'
+//          isValid = false
+//       }
+
+//       if (isValid) {
+//          // Update profile name in the view
+//          document.querySelector('.profile-name').textContent = newName
+
+//          console.log('Changed Name:', {
+//             newName,
+//             password,
+//          })
+
+//          // Show success notification
+//          showNotification(`Name changed to "${newName}" successfully!`, 'success')
+
+//          // Clear form
+//          this.reset()
+
+//          // Go back to profile
+//          setTimeout(() => {
+//             backToProfile()
+//          }, 1500)
+//       }
+//    })
+
+// // Reset Password Form Functionality
+// document
+//    .getElementById('resetPasswordForm')
+//    .addEventListener('submit', function (e) {
+//       e.preventDefault()
+
+//       // Clear previous errors
+//       document.getElementById('currentPasswordError').innerText = ''
+//       // Fixed: using correct ID
+//       document.getElementById('newPasswordError').innerText = ''
+//       document.getElementById('resetConfirmPasswordError').innerText = ''
+
+//       // Get input values
+//       let currentPassword = document.getElementById('currentPassword').value
+//       let resetNewPassword = document.getElementById('resetNewPassword').value
+//       let resetConfirmPassword = document.getElementById('resetConfirmPassword').value
+//       let isValid = true
+
+//       // Current Password validation
+//       if (currentPassword === "") {
+//          document.getElementById('currentPasswordError').innerText = '*Current password cannot be empty.'
+//          isValid = false
+//       }
+
+//       // New Password validation - Fixed: using correct error element ID
+//       if (resetNewPassword === "") {
+//          document.getElementById('newPasswordError').innerText = '*New password cannot be empty.'
+//          isValid = false
+//       } else if (resetNewPassword.length < 6) {
+//          document.getElementById('newPasswordError').innerText = '*Password must be at least 6 characters long.'
+//          isValid = false
+//       } else if (!/[A-Z]/.test(resetNewPassword) || !/[a-z]/.test(resetNewPassword) || !/[0-9]/.test(resetNewPassword) || !/[\W_]/.test(resetNewPassword)) {
+//          document.getElementById('newPasswordError').innerText = '*Password must contain uppercase, lowercase, digit, and special character.'
+//          isValid = false
+//       }
+
+//       // Confirm Password validation
+//       if (resetConfirmPassword === "") {
+//          document.getElementById('resetConfirmPasswordError').innerText = '*Please confirm your password.'
+//          isValid = false
+//       } else if (resetNewPassword !== resetConfirmPassword) {
+//          document.getElementById('resetConfirmPasswordError').innerText = '*Passwords do not match.'
+//          isValid = false
+//       }
+
+//       // Check if new password is same as current password
+//       if (currentPassword === resetNewPassword && currentPassword !== "") {
+//          document.getElementById('newPasswordError').innerText = '*New password must be different from current password.'
+//          isValid = false
+//       }
+
+//       if (isValid) {
+//          console.log('Password Reset:', {
+//             currentPassword,
+//             resetNewPassword,
+//             resetConfirmPassword,
+//          })
+
+//          // Show success notification
+//          showNotification('Password reset successfully!', 'success')
+
+//          // Clear form
+//          this.reset()
+
+//          // Go back to profile
+//          setTimeout(() => {
+//             backToProfile()
+//          }, 1500)
+//       }
+//    })
+
+// function logout() {
+//    if (confirm('Are you sure you want to logout?')) {
+//       alert('Logged out successfully!')
+//    }
+// }
+
+
+
+        // // Dummy functions for buttons
+        // function lookupStudent() {
+        //     document.getElementById('studentInfo').style.display = 'block';
+        //     document.getElementById('studentInfo').innerHTML = '<strong>Student Name:</strong> Jane Smith<br><strong>Class:</strong> 10A';
+        // }
+        // function issueBook() {
+        //     alert('Book issued!');
+        // }
+        // function returnBook() {
+        //     alert('Book returned!');
+        // }
+        // function viewStudentBooks() {
+        //     document.getElementById('returnInfo').style.display = 'block';
+        //     document.getElementById('returnInfo').innerHTML = '<strong>Books Issued:</strong> 2<br><strong>Due Date:</strong> 2024-06-15';
+        // }
+        // function importBooks() {
+        //     alert('Import books functionality not implemented.');
+        // }
+        // function exportBooks() {
+        //     alert('Export inventory functionality not implemented.');
+        // }
+        // function manageUsersReminders() {
+        //     alert('Reminders sent!');
+        // }
+        // function collectFine() {
+        //     alert('Fine collected!');
+        // }
+        // function generateFineReport() {
+        //     alert('Fine report generated!');
+        // }
+        // function generateReport(type) {
+        //     alert('Report generated: ' + type);
+        // }
+
+        // // Add Book Form Submission
+        // document.getElementById('addBookForm').onsubmit = function(e) {
+        //     e.preventDefault();
+        //     alert('Book added!');
+        //     closeModal('addBookModal');
+        // };
 
 // // Sample data
 //         const books = [
@@ -94,36 +334,3 @@
 //             loadOverdueBooks();
 //             setupEventListeners();
 //         });
-
-//         function showSection(sectionName) {
-//             // Hide all sections
-//             document.querySelectorAll('.content-section').forEach(section => {
-//                 section.classList.remove('active');
-//             });
-            
-//             // Remove active class from all tabs
-//             document.querySelectorAll('.nav-tab').forEach(tab => {
-//                 tab.classList.remove('active');
-//             });
-            
-//             // Show selected section
-//             document.getElementById(sectionName).classList.add('active');
-            
-//             // Add active class to clicked tab
-//             event.target.classList.add('active');
-//         }
-
-//         function loadBooks() {
-//             const tbody = document.getElementById('booksTable');
-//             if (!tbody) return;
-            
-//             tbody.innerHTML = '';
-//             books.forEach(book => {
-//                 const row = document.createElement('tr');
-//                 row.innerHTML = `
-//                     <td>${book.isbn}</td>
-//                     <td>${book.title}</td>
-//                     <td>${book.author}</td>
-//                     <td>${book.genre.charAt(0).toUpperCase() + book.genre.slice(1)}</td>
-//                     <td><span class="status-badge status-${book.status}">${book.status.toUpperCase()}</span></td>
-//                     <td>${

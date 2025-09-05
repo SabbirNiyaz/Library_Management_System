@@ -382,6 +382,13 @@
             color: #000;
         }
 
+
+        /* edit profile */
+ .action-btn{
+    background: #0056b3;
+    color: white;
+ }
+
         /* Responsive */
         @media (max-width: 768px) {
             .container {
