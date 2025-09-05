@@ -32,13 +32,17 @@ if (isset($_POST['login'])) {
             $_SESSION['email'] = $user['email'];
             
             if ($user['role'] === 'admin') {
-                header("Location: admin-Dashboard.html");
+                header("Location: ../Dashboard/Admin/admin-Dashboard.php");
+                // sabbir@gmail.com  X7q!pR9v@2Lm#dW4
+
             } 
             else if ($user['role'] === 'librarian') {
-                header("Location: librarian-Dashboard.html");
+                header("Location: ../Dashboard/Librarian/librarian-Dashboard.php");
+                // hossain@gmail.com X7q!pR9v@2Lm#dW4
             }
             else {
-                header("Location: student-Dashboard.html");
+                header("Location: ../Dashboard/Student/student-Dashboard.php");
+                // niyaz@gmail.com X7q!pR9v@2Lm#dW4
             }
             exit();
         }

@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (!isset($_SESSION['email'])) {
+    header("Location: index.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -23,7 +31,7 @@
                   <strong>John Smith</strong><br />
                   <small>Student ID: STU001</small>
                </div>
-               <button class="logout-btn" onclick="logout()">Logout</button>
+               <button class="logout-btn" onclick="window.location.href='../../Authentication/logout.php'">Logout</button>
             </div>
          </div>
 
