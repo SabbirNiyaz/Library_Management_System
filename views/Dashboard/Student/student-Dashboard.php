@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['email'])) {
-    header("Location: index.php");
+    header("Location: ../../Authentication/index.php");
     exit();
 }
 ?>
@@ -28,8 +28,8 @@ if (!isset($_SESSION['email'])) {
             </div>
             <div class="user-info">
                <div>
-                  <strong>John Smith</strong><br />
-                  <small>Student ID: STU001</small>
+                  <strong><?= $_SESSION['name']; ?></strong><br/>
+                  <small><?= $_SESSION['email']; ?></small>
                </div>
                <button class="logout-btn" onclick="window.location.href='../../Authentication/logout.php'">Logout</button>
             </div>
@@ -77,8 +77,8 @@ if (!isset($_SESSION['email'])) {
                      src="images/profile-picture.png"
                      alt=""
                   />
-                  <p class="profile-name">John Smith</p>
-                  <p class="profile-email">leomessi@gmail.com</p>
+                  <p class="profile-name"><?= $_SESSION['name']; ?></p>
+                  <p class="profile-email"> Gmail: <strong><?= $_SESSION['email']; ?></strong></p>
 
          <!-- Edit Profile Buttons -->
                   <button

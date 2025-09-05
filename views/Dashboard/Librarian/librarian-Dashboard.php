@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (!isset($_SESSION['email'])) {
+    header("Location: ../../Authentication/index.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,12 +23,12 @@
                 <p>Librarian Portal</p>
             </div>
             <div class="librarian-info">
-                <div class="librarian-avatar">JD</div>
+                <div class="librarian-avatar">LP</div>
                 <div>
-                    <strong>Name</strong><br>
+                    <strong><?= $_SESSION['name']; ?></strong><br>
                     <small>Senior Librarian</small>
                 </div>
-                <button class="logout-btn" onclick="logout()">Logout</button>
+                <button class="logout-btn" onclick="window.location.href='../../Authentication/logout.php'">Logout</button>
             </div>
         </div>
 

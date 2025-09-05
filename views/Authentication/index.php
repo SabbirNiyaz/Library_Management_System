@@ -60,7 +60,7 @@ function showActiveForm($formName, $activeForm) {
                 <div class="error" id="passwordError"></div>
                 <select name="role" id="role" required>
                     <option value="">Select Role</option>
-                    <option value="user">User</option>
+                    <option value="student">Student</option>
                     <option value="librarian">Librarian</option>
                     <option value="admin">Admin</option>
                 </select>
