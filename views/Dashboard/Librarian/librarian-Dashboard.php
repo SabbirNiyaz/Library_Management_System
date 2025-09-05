@@ -214,7 +214,7 @@ if (!isset($_SESSION['email'])) {
             
         </div>
 
-        Settings Section<!-- Settings Section -->
+      <!-- Settings Section -->
 <div id="settings" class="content-section">
     <!-- View Profile -->
     <div id="viewProfile" class="view-profile-container">
@@ -403,6 +403,7 @@ if (!isset($_SESSION['email'])) {
     <!-- Scripts -->
     <script src="librarian-Script.js"></script>
     <script>
+      
 // Edit Profile Modal
 
 
@@ -582,6 +583,8 @@ function logout() {
         alert('Logged out successfully!')
     }
 }
+
     </script>
+   
 </body>
 </html>
