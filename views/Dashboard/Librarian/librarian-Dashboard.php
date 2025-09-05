@@ -13,143 +13,6 @@ if (!isset($_SESSION['email'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Librarian Dashboard - Library Management System</title>
     <link rel="stylesheet" href="../../assets/css/dashboard-style/librarian-Style.css">
-    <!-- <style>
-   .action-btn {
-   background: #0065d1;
-   margin: 0 auto;
-   color: white;
-   border: none;
-   /* padding: 12px; */
-   width: 15%;
-   border-radius: 5px;
-   cursor: pointer;
-}
-.action-btn:hover {
-   background: #113F67;
-}
-.back-button {
-   display: block;
-   margin: 15px auto;
-   width: 10%;
-   height: 45px;
-   font-size: 16px;
-   font-weight: 600;
-   border-radius: 10px;
-}
-
-
-.btn {
-   width: 15%;
-   display: block;
-   margin: 0 auto;
-   height: 45px;
-   padding: 12px;
-   margin-top: 10px;
-   border: none;
-   border-radius: 8px;
-   font-size: 16px;
-   font-weight: bold;
-   cursor: pointer;
-   background: #007bff;
-   color: white;
-   transition: 0.3s;
-   margin-bottom: 10px;
-}
-.btn:hover {
-   background: #0056b3;
-}
-
-/* View Profile */
-.view-profile-container {
-   background: #fff;
-   padding: 50px;
-   border-radius: 12px;
-   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-   width: 100%;
-   height: 100%;
-}
-.profile-picture {
-   width: 200px;
-   border-radius: 100%;
-   margin: 10px auto;
-   display: block;
-}
-
-.profile-name {
-   font-size: 20px;
-   font-weight: bold;
-   text-align: center;
-   margin: 20px auto 10px auto;
-}
-
-.profile-email {
-   color: gray;
-   text-align: center;
-   margin-bottom: 40px;
-   font-size: 16px;
-}
-
-.view-profile-container button {
-   display: block;
-   padding: 10px 30px;
-   margin: 20px auto;
-   font-size: 16px;
-}
-
-/* Update Profile */
-.update-profile-container {
-   background: #fff;
-   padding: 50px;
-   border-radius: 12px;
-   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-   width: 100%;
-   height: 100%;
-}
-
-.update-profile-container h2 {
-   text-align: center;
-   margin-bottom: 40px;
-   color: #333;
-}
-
-.form-group {
-   /* margin-bottom: 4px;
-   margin-top: 8px; */
-   margin: 10px auto;
-   width: 50%;
-}
-
-.form-group label {
-   display: block;
-   font-size: 18px;
-   margin-bottom: 5px;
-   font-weight: bold;
-   color: #555;
-}
-
-.form-group input {
-   width: 100%;
-   height: 45px;
-   padding: 10px;
-   border: 1px solid #ccc;
-   border-radius: 8px;
-   outline: none;
-   font-size: 14px;
-}
-
-.form-group input:focus {
-   border-color: #007bff;
-}
-
-/* error message */
-.error{
-   padding-bottom: 10px;
-   color: red;
-   font-size: small;
-}
-
-
-    </style> -->
 </head>
 <body>
     <div class="container">
@@ -250,7 +113,7 @@ if (!isset($_SESSION['email'])) {
         </button>
     </div>
 
-    <!-- Update Profile -->
+        <!-- Update Profile -->
     <div
         id="editProfile"
         class="update-profile-container section hidden"
@@ -259,7 +122,7 @@ if (!isset($_SESSION['email'])) {
         <h2>Edit Name and Password</h2>
         <form id="updateProfileForm" autocomplete="off" novalidate>
             <div class="form-group">
-                <label for="name">Name</label>
+                <label for="name">New Name</label>
                 <input
                     type="text"
                     id="name"
@@ -267,16 +130,6 @@ if (!isset($_SESSION['email'])) {
                     required
                 />
                 <div class="error" id="nameError"></div>
-            </div>
-            <div class="form-group">
-                <label for="oldPassword">Old Password</label>
-                <input
-                    type="password"
-                    id="oldPassword"
-                    placeholder="Enter your old password"
-                    required
-                />
-                <div class="error" id="oldPasswordError"></div>
             </div>
             <div class="form-group">
                 <label for="newPassword">New Password</label>
@@ -298,6 +151,17 @@ if (!isset($_SESSION['email'])) {
                 />
                 <div class="error" id="confirmPasswordError"></div>
             </div>
+            <div class="form-group">
+                <label for="oldPassword">Current Password</label>
+                <input
+                    type="password"
+                    id="oldPassword"
+                    placeholder="Enter your old password"
+                    required
+                />
+                <div class="error" id="oldPasswordError"></div>
+            </div>
+
             <button type="submit" class="btn">Update</button>
         </form>
         <button
@@ -328,7 +192,7 @@ if (!isset($_SESSION['email'])) {
                 <div class="error" id="newNameError"></div>
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
+                <label for="password">Current Password</label>
                 <input
                     type="password"
                     id="password"

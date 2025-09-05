@@ -52,7 +52,7 @@ body {
 .back-button {
    display: block;
    margin: 15px auto;
-   width: 100%;
+   width: 15%;
    height: 45px;
    font-size: 16px;
    font-weight: 600;
@@ -256,7 +256,6 @@ body {
    gap: 10px;
    margin-bottom: 20px;
 }
-
 .action-btn {
    background: #0065d1;
    color: white;
@@ -264,6 +263,21 @@ body {
    padding: 12px;
    border-radius: 5px;
    cursor: pointer;
+   width: 100%;
+   display: block;
+   margin: 0 auto;
+}
+
+.action-btn2 {
+   background: #0065d1;
+   color: white;
+   border: none;
+   padding: 12px;
+   border-radius: 5px;
+   cursor: pointer;
+   width: 30%;
+   display: block;
+   margin: 0 auto;
 }
 
 .toggle-btn {
@@ -363,7 +377,9 @@ body {
 }
 
 .btn {
-   width: 100%;
+   width: 20%;
+   display: block;
+   margin: 0 auto;
    height: 45px;
    padding: 12px;
    margin-top: 10px;

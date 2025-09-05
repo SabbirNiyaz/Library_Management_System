@@ -12,11 +12,8 @@ if (!isset($_SESSION['email'])) {
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>Student Dashboard - Library System</title>
-      <link rel="stylesheet" href="student-Style.css" />
-       <style>
-         
+      <link rel="stylesheet" href="../../assets/css/dashboard-style/student-Style.css" />
 
-       </style>
    </head>
       <body>
       <div class="container">
@@ -74,7 +71,7 @@ if (!isset($_SESSION['email'])) {
                <div id="viewProfile" class="view-profile-container hidden">
                   <img
                      class="profile-picture"
-                     src="images/profile-picture.png"
+                     src="../../assets/images/profile-picture.png"
                      alt=""
                   />
                   <p class="profile-name"><?= $_SESSION['name']; ?></p>
@@ -83,7 +80,7 @@ if (!isset($_SESSION['email'])) {
          <!-- Edit Profile Buttons -->
                   <button
                      id="editProfileButton"
-                     class="action-btn"
+                     class="action-btn2"
                      onclick="editProfile()"
                   >
                      Edit Profile
@@ -91,14 +88,14 @@ if (!isset($_SESSION['email'])) {
                   
                   <button
                      id="changeNameButton"
-                     class="action-btn"
+                     class="action-btn2"
                      onclick="changeName()"
                   >
                      Change Name
                   </button>
                   <button
                      id="resetPasswordButton"
-                     class="action-btn"
+                     class="action-btn2"
                      onclick="resetPassword()"
                   >
                      Reset Password
@@ -304,7 +301,7 @@ if (!isset($_SESSION['email'])) {
          </div>
       </div>
 
-      <script src="student-Script.js"></script>
+      <script src="../../assets/app/dashboard-Script/student-Script.js"></script>
 
    </body>
 </html>
