@@ -214,199 +214,186 @@ if (!isset($_SESSION['email'])) {
             
         </div>
 
-        <!-- Settings Section -->
-        <div id="settings" class="content-section">
-            <!-- ... (your existing code for settings section) ... -->
-             <!-- View Profile -->
-               <div id="viewProfile" class="view-profile-container">
-                  <img
-                     class="profile-picture"
-                     src="images/profile-picture.png"
-                     alt=""
-                  />
-                  <p class="profile-name"><?= $_SESSION['name']; ?></p>
-                  <p class="profile-email"> Gmail: <strong><?= $_SESSION['email']; ?></strong></p>
+        Settings Section<!-- Settings Section -->
+<div id="settings" class="content-section">
+    <!-- View Profile -->
+    <div id="viewProfile" class="view-profile-container">
+        <img
+            class="profile-picture"
+            src="images/profile-picture.png"
+            alt="Profile Picture"
+        />
+        <p class="profile-name"><?= $_SESSION['name']; ?></p>
+        <p class="profile-email"> Gmail: <strong><?= $_SESSION['email']; ?></strong></p>
 
-         <!-- Edit Profile Buttons -->
-                  <button
-                     id="editProfileButton"
-                     class="action-btn"
-                     onclick="editProfile()"
-                  >
-                     Edit Profile
-                  </button>
-                  
-                  <button
-                     id="changeNameButton"
-                     class="action-btn"
-                     onclick="changeName()"
-                  >
-                     Change Name
-                  </button>
-                  <button
-                     id="resetPasswordButton"
-                     class="action-btn"
-                     onclick="resetPassword()"
-                  >
-                     Reset Password
-                  </button>
-               </div>
-               
-               <!-- Update Profile -->
-               <div
-                  id="editProfile"
-                  class="update-profile-container section hidden"
-               >
-               <!-- edit profile block -->
-                  <h2>Edit Name and Password</h2>
-                  <form id="updateProfileForm">
-                     <div class="form-group">
-                        <label for="name">Name</label>
-                        <input
-                           type="text"
-                           id="name"
-                           placeholder="Enter your name"
-                           required
-                        />
-                     </div>
-                     <div class="error" id="nameError"></div>
-                     <div class="form-group">
-                        <label for="oldPassword">Old Password</label>
-                        <input
-                           type="password"
-                           id="oldPassword"
-                           placeholder="Enter your old password"
-                           required
-                        />
-                     </div>
-                     <div class="error" id="oldPasswordError"></div>
-                     <div class="form-group">
-                        <label for="newPassword">New Password</label>
-                        <input
-                           type="password"
-                           id="newPassword"
-                           placeholder="Enter a new password"
-                           required
-                        />
-                     </div>
-                     <div class="error" id="newPasswordError"></div>
-                     <div class="form-group">
-                        <label for="confirmPassword">Confirm Password</label>
-                        <input
-                           type="password"
-                           id="confirmPassword"
-                           placeholder="Confirm password"
-                           required
-                        />
-                     </div>
-                     <div class="error" id="confirmPasswordError"></div>
-                     <button type="submit" class="btn">Update</button>
-                  </form>
-
-                  <!-- Back Button -->
-                  <button
-                     id="backToProfileButton"
-                     class="logout-btn back-button"
-                     onclick="backToProfile()"
-                  >
-                     Back
-                  </button>
-               </div>
-            
-            <!-- change name -->
-               <div
-                  id="changeName"
-                  class="update-profile-container section hidden"
-               >
-               <!-- edit profile block -->
-                  <h2>Change Name</h2>
-                  <form id="changeNameForm">
-                     <div class="form-group">
-                        <label for="newName">New Name</label>
-                        <input
-                           type="text"
-                           id="newName"
-                           placeholder="Enter your new full name"
-                           required
-                        />
-                     </div>
-                     <div class="error" id="newNameError"></div>
-                     <div class="form-group">
-                        <label for="password">Password</label>
-                        <input
-                           type="password"
-                           id="password"
-                           placeholder="Enter your password"
-                           required
-                        />
-                     </div>
-                     <div class="error" id="passwordError"></div>
-                     <button type="submit" class="btn">Update</button>
-                  </form>
-
-                  <!-- Back Button -->
-                  <button
-                     id="backToProfileButton2"
-                     class="logout-btn back-button"
-                     onclick="backToProfile()"
-                  >
-                     Back
-                  </button>
-               </div>
-
-            <!-- Reset Password -->
-               <div
-                  id="resetPassword"
-                  class="update-profile-container section hidden"
-               >
-               <!-- reset password block -->
-                  <h2>Reset Password</h2>
-                  <form id="resetPasswordForm">
-                     <div class="form-group">
-                        <label for="currentPassword">Current Password</label>
-                        <input
-                           type="password"
-                           id="currentPassword"
-                           placeholder="Enter your current password"
-                           required
-                        />
-                     </div>
-                     <div class="error" id="currentPasswordError"></div>
-                     <div class="form-group">
-                        <label for="resetNewPassword">New Password</label>
-                        <input
-                           type="password"
-                           id="resetNewPassword"
-                           placeholder="Enter your new password"
-                           required
-                        />
-                     </div>
-                     <div class="error" id="newPasswordError"></div>
-                     <div class="form-group">
-                        <label for="resetConfirmPassword">Confirm Password</label>
-                        <input
-                           type="password"
-                           id="resetConfirmPassword"
-                           placeholder="Confirm your new password"
-                           required
-                        />
-                        <div class="error" id="resetConfirmPasswordError"></div>
-                     </div>
-                     <button type="submit" class="btn">Reset Password</button>
-                  </form>
-
-                  <!-- Back Button -->
-                  <button
-                     id="backToProfileButton3"
-                     class="logout-btn back-button"
-                     onclick="backToProfile()"
-                  >
-                     Back
-                  </button>
-               </div>
-            </div>
-        </div>
+        <!-- Edit Profile Buttons -->
+        <button
+            id="editProfileButton"
+            class="action-btn"
+            onclick="editProfile()"
+        >
+            Edit Profile
+        </button>
+        <button
+            id="changeNameButton"
+            class="action-btn"
+            onclick="changeName()"
+        >
+            Change Name
+        </button>
+        <button
+            id="resetPasswordButton"
+            class="action-btn"
+            onclick="resetPassword()"
+        >
+            Reset Password
+        </button>
     </div>
+
+    <!-- Update Profile -->
+    <div
+        id="editProfile"
+        class="update-profile-container section hidden"
+    >
+        <h2>Edit Name and Password</h2>
+        <form id="updateProfileForm" autocomplete="off" novalidate>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Enter your name"
+                    required
+                />
+                <div class="error" id="nameError"></div>
+            </div>
+            <div class="form-group">
+                <label for="oldPassword">Old Password</label>
+                <input
+                    type="password"
+                    id="oldPassword"
+                    placeholder="Enter your old password"
+                    required
+                />
+                <div class="error" id="oldPasswordError"></div>
+            </div>
+            <div class="form-group">
+                <label for="newPassword">New Password</label>
+                <input
+                    type="password"
+                    id="newPassword"
+                    placeholder="Enter a new password"
+                    required
+                />
+                <div class="error" id="newPasswordError"></div>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    placeholder="Confirm password"
+                    required
+                />
+                <div class="error" id="confirmPasswordError"></div>
+            </div>
+            <button type="submit" class="btn">Update</button>
+        </form>
+        <button
+            id="backToProfileButton"
+            class="logout-btn back-button"
+            onclick="backToProfile()"
+        >
+            Back
+        </button>
+    </div>
+
+    <!-- Change Name -->
+    <div
+        id="changeName"
+        class="update-profile-container section hidden"
+    >
+        <h2>Change Name</h2>
+        <form id="changeNameForm" autocomplete="off" novalidate>
+            <div class="form-group">
+                <label for="newName">New Name</label>
+                <input
+                    type="text"
+                    id="newName"
+                    placeholder="Enter your new full name"
+                    required
+                />
+                <div class="error" id="newNameError"></div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter your password"
+                    required
+                />
+                <div class="error" id="passwordError"></div>
+            </div>
+            <button type="submit" class="btn">Update</button>
+        </form>
+        <button
+            id="backToProfileButton2"
+            class="logout-btn back-button"
+            onclick="backToProfile()"
+        >
+            Back
+        </button>
+    </div>
+
+    <!-- Reset Password -->
+    <div
+        id="resetPassword"
+        class="update-profile-container section hidden"
+    >
+        <h2>Reset Password</h2>
+        <form id="resetPasswordForm" autocomplete="off" novalidate>
+            <div class="form-group">
+                <label for="currentPassword">Current Password</label>
+                <input
+                    type="password"
+                    id="currentPassword"
+                    placeholder="Enter your current password"
+                    required
+                />
+                <div class="error" id="currentPasswordError"></div>
+            </div>
+            <div class="form-group">
+                <label for="resetNewPassword">New Password</label>
+                <input
+                    type="password"
+                    id="resetNewPassword"
+                    placeholder="Enter your new password"
+                    required
+                />
+                <div class="error" id="newPasswordError"></div>
+            </div>
+            <div class="form-group">
+                <label for="resetConfirmPassword">Confirm Password</label>
+                <input
+                    type="password"
+                    id="resetConfirmPassword"
+                    placeholder="Confirm your new password"
+                    required
+                />
+                <div class="error" id="resetConfirmPasswordError"></div>
+            </div>
+            <button type="submit" class="btn">Reset Password</button>
+        </form>
+        <button
+            id="backToProfileButton3"
+            class="logout-btn back-button"
+            onclick="backToProfile()"
+        >
+            Back
+        </button>
+    </div>
+</div>
 
     <!-- Add Book Modal -->
     <div id="addBookModal" class="modal">
@@ -416,271 +403,185 @@ if (!isset($_SESSION['email'])) {
     <!-- Scripts -->
     <script src="librarian-Script.js"></script>
     <script>
-              // Edit Profile Modal
+// Edit Profile Modal
 
 
+// Section show/hide
 function editProfile() {
-   document.getElementById('viewProfile').classList.add('hidden')
-   document.getElementById('editProfile').classList.remove('hidden')
+    document.getElementById('viewProfile').classList.add('hidden')
+    document.getElementById('editProfile').classList.remove('hidden')
 }
-
 function changeName() {
-   document.getElementById('viewProfile').classList.add('hidden')
-   document.getElementById('changeName').classList.remove('hidden')
+    document.getElementById('viewProfile').classList.add('hidden')
+    document.getElementById('changeName').classList.remove('hidden')
 }
-
 function resetPassword() {
-   document.getElementById('viewProfile').classList.add('hidden')
-   document.getElementById('resetPassword').classList.remove('hidden')
+    document.getElementById('viewProfile').classList.add('hidden')
+    document.getElementById('resetPassword').classList.remove('hidden')
 }
-
-// Back To Profile Button Functionality
 function backToProfile() {
-   document.getElementById('viewProfile').classList.remove('hidden')
-   document.getElementById('editProfile').classList.add('hidden')
-   document.getElementById('changeName').classList.add('hidden')
-   document.getElementById('resetPassword').classList.add('hidden')
-   
-   // Clear all error messages
-   clearAllErrorMessages()
+    document.getElementById('viewProfile').classList.remove('hidden')
+    document.getElementById('editProfile').classList.add('hidden')
+    document.getElementById('changeName').classList.add('hidden')
+    document.getElementById('resetPassword').classList.add('hidden')
+    clearAllErrorMessages()
 }
 
-       
-// Function to clear all error messages
+// Error clear
 function clearAllErrorMessages() {
-   // Clear errors from Edit Profile form
-   document.getElementById('nameError').innerText = ''
-   document.getElementById('oldPasswordError').innerText = ''
-   document.getElementById('newPasswordError').innerText = ''
-   document.getElemen tById('confirmPasswordError').innerText = ''
-   
-   // Clear errors from Change Name form
-   document.getElementById('newNameError').innerText = ''
-   
-   // Clear errors from Reset Password form
-   document.getElementById('currentPasswordError').innerText = ''
-   document.getElementById('resetConfirmPasswordError').innerText = ''
+    // Edit Profile errors
+    document.getElementById('nameError').innerText = ''
+    document.getElementById('oldPasswordError').innerText = ''
+    document.getElementById('newPasswordError').innerText = ''
+    document.getElementById('confirmPasswordError').innerText = ''
+    // Change Name errors
+    document.getElementById('newNameError').innerText = ''
+    document.getElementById('passwordError').innerText = ''
+    // Reset Password errors
+    document.getElementById('currentPasswordError').innerText = ''
+    document.getElementById('resetConfirmPasswordError').innerText = ''
 }
 
-// Update Profile Functionality
-document
-   .getElementById('updateProfileForm')
-   .addEventListener('submit', function (e) {
-      e.preventDefault()
+// Show notification (simple implementation)
+function showNotification(message, type) {
+    // You can replace with a more sophisticated notification system
+    alert(message)
+}
 
-      // Clear previous errors
-      const nameError = document.getElementById('nameError')
-      nameError.innerText = ''
-      const oldPasswordError = document.getElementById('oldPasswordError')
-      oldPasswordError.innerText = ''
-      const newPasswordError = document.getElementById('newPasswordError')
-      newPasswordError.innerText = ''
-      const confirmPasswordError = document.getElementById('confirmPasswordError')
-      confirmPasswordError.innerText = ''
+// Update Profile Form
+document.getElementById('updateProfileForm').addEventListener('submit', function (e) {
+    e.preventDefault()
+    clearAllErrorMessages()
+    let name = document.getElementById('name').value.trim()
+    let oldPassword = document.getElementById('oldPassword').value
+    let newPassword = document.getElementById('newPassword').value
+    let confirmPassword = document.getElementById('confirmPassword').value
+    let isValid = true
 
-      // Get input values
-      let name = document.getElementById('name').value.trim()
-      let oldPassword = document.getElementById('oldPassword').value
-      let newPassword = document.getElementById('newPassword').value
-      let confirmPassword = document.getElementById('confirmPassword').value
-      let isValid = true
+    // Name validation
+    if (name === "") {
+        document.getElementById('nameError').innerText = '*Name cannot be empty.'
+        isValid = false
+    } else if (!/^[a-zA-Z\s]{2,}$/.test(name)) {
+        document.getElementById('nameError').innerText = '*Please enter a valid name (at least 2 letters, letters and spaces only).'
+        isValid = false
+    }
+    // Old Password
+    if (oldPassword === "") {
+        document.getElementById('oldPasswordError').innerText = '*Old password cannot be empty.'
+        isValid = false
+    }
+    // New Password
+    if (newPassword === "") {
+        document.getElementById('newPasswordError').innerText = '*New password cannot be empty.'
+        isValid = false
+    } else if (newPassword.length < 6) {
+        document.getElementById('newPasswordError').innerText = '*Password must be at least 6 characters long.'
+        isValid = false
+    } else if (!/[A-Z]/.test(newPassword) || !/[a-z]/.test(newPassword) || !/[0-9]/.test(newPassword) || !/[\W_]/.test(newPassword)) {
+        document.getElementById('newPasswordError').innerText = '*Password must contain uppercase, lowercase, digit, and special character.'
+        isValid = false
+    }
+    // Confirm Password
+    if (confirmPassword === "") {
+        document.getElementById('confirmPasswordError').innerText = '*Please confirm your password.'
+        isValid = false
+    } else if (newPassword !== confirmPassword) {
+        document.getElementById('confirmPasswordError').innerText = '*Passwords do not match.'
+        isValid = false
+    }
+    // New password != Old password
+    if (oldPassword === newPassword && oldPassword !== "") {
+        document.getElementById('newPasswordError').innerText = '*New password must be different from old password.'
+        isValid = false
+    }
+    if (isValid) {
+        document.querySelector('.profile-name').textContent = name
+        showNotification('Profile updated successfully!', 'success')
+        this.reset()
+        setTimeout(() => { backToProfile() }, 1500)
+    }
+})
 
-      // Name validation
-      if (name === "") {
-         nameError.innerText = '*Name cannot be empty.'
-         isValid = false
-      } else if (!/^[a-zA-Z\s]{2,}$/.test(name)) {
-         nameError.innerText = '*Please enter a valid name (at least 2 letters, letters and spaces only).'
-         isValid = false
-      }
+// Change Name Form
+document.getElementById('changeNameForm').addEventListener('submit', function (e) {
+    e.preventDefault()
+    clearAllErrorMessages()
+    let newName = document.getElementById('newName').value.trim()
+    let password = document.getElementById('password').value
+    let isValid = true
 
-      // Old Password validation
-      if (oldPassword === "") {
-         oldPasswordError.innerText = '*Old password cannot be empty.'
-         isValid = false
-      }
+    // Name validation
+    if (newName === "") {
+        document.getElementById('newNameError').innerText = '*Name cannot be empty.'
+        isValid = false
+    } else if (!/^[a-zA-Z\s]{2,}$/.test(newName)) {
+        document.getElementById('newNameError').innerText = '*Please enter a valid name (at least 2 letters, letters and spaces only).'
+        isValid = false
+    }
+    // Password validation
+    if (password === "") {
+        document.getElementById('passwordError').innerText = '*Password cannot be empty.'
+        isValid = false
+    }
+    if (isValid) {
+        document.querySelector('.profile-name').textContent = newName
+        showNotification(`Name changed to "${newName}" successfully!`, 'success')
+        this.reset()
+        setTimeout(() => { backToProfile() }, 1500)
+    }
+})
 
-      // New Password validation
-      if (newPassword === "") {
-         newPasswordError.innerText = '*New password cannot be empty.'
-         isValid = false
-      } else if (newPassword.length < 6) {
-         newPasswordError.innerText = '*Password must be at least 6 characters long.'
-         isValid = false
-      } else if (!/[A-Z]/.test(newPassword) || !/[a-z]/.test(newPassword) || !/[0-9]/.test(newPassword) || !/[\W_]/.test(newPassword)) {
-         newPasswordError.innerText = '*Password must contain uppercase, lowercase, digit, and special character.'
-         isValid = false
-      }
+// Reset Password Form
+document.getElementById('resetPasswordForm').addEventListener('submit', function (e) {
+    e.preventDefault()
+    clearAllErrorMessages()
+    let currentPassword = document.getElementById('currentPassword').value
+    let resetNewPassword = document.getElementById('resetNewPassword').value
+    let resetConfirmPassword = document.getElementById('resetConfirmPassword').value
+    let isValid = true
 
-      // Confirm Password validation
-      if (confirmPassword === "") {
-         confirmPasswordError.innerText = '*Please confirm your password.'
-         isValid = false
-      } else if (newPassword !== confirmPassword) {
-         confirmPasswordError.innerText = '*Passwords do not match.'
-         isValid = false
-      }
-
-      // Check if new password is same as old password
-      if (oldPassword === newPassword && oldPassword !== "") {
-         newPasswordError.innerText = '*New password must be different from old password.'
-         isValid = false
-      }
-
-      if (isValid) {
-         // Update profile name in the view
-         document.querySelector('.profile-name').textContent = name
-
-         console.log('Updated Profile:', {
-            name,
-            oldPassword,
-            newPassword,
-            confirmPassword,
-         })
-
-         // Show success notification
-         showNotification('Profile updated successfully!', 'success')
-
-         // Clear form
-         this.reset()
-
-         // Go back to profile
-         setTimeout(() => {
-            backToProfile()
-         }, 1500)
-      }
-   })
-
-// Change Name Form Functionality
-document
-   .getElementById('changeNameForm')
-   .addEventListener('submit', function (e) {
-      e.preventDefault()
-
-      // Clear previous errors
-      const newNameError = document.getElementById('newNameError')
-      newNameError.innerText = ''
-      // Note: There's no passwordError element in changeName form, so removing that line
-
-      // Get input values
-      let newName = document.getElementById('newName').value.trim()
-      let password = document.getElementById('password').value
-      let isValid = true
-
-      // Name validation
-      if (newName === "") {
-         newNameError.innerText = '*Name cannot be empty.'
-         isValid = false
-      } else if (!/^[a-zA-Z\s]{2,}$/.test(newName)) {
-         newNameError.innerText = '*Please enter a valid name (at least 2 letters, letters and spaces only).'
-         isValid = false
-      }
-
-      // Password validation - Note: No error element exists for password in changeName form
-
-      if (password === "") {
-         passwordError.innerText = '*Password cannot be empty.'
-         isValid = false
-      }
-
-      if (isValid) {
-         // Update profile name in the view
-         document.querySelector('.profile-name').textContent = newName
-
-         console.log('Changed Name:', {
-            newName,
-            password,
-         })
-
-         // Show success notification
-         showNotification(`Name changed to "${newName}" successfully!`, 'success')
-
-         // Clear form
-         this.reset()
-
-         // Go back to profile
-         setTimeout(() => {
-            backToProfile()
-         }, 1500)
-      }
-   })
-
-// Reset Password Form Functionality
-document
-   .getElementById('resetPasswordForm')
-   .addEventListener('submit', function (e) {
-      e.preventDefault()
-
-      // Clear previous errors
-      document.getElementById('currentPasswordError').innerText = ''
-      // Fixed: using correct ID
-      document.getElementById('newPasswordError').innerText = ''
-      document.getElementById('resetConfirmPasswordError').innerText = ''
-
-      // Get input values
-      let currentPassword = document.getElementById('currentPassword').value
-      let resetNewPassword = document.getElementById('resetNewPassword').value
-      let resetConfirmPassword = document.getElementById('resetConfirmPassword').value
-      let isValid = true
-
-      // Current Password validation
-      if (currentPassword === "") {
-         document.getElementById('currentPasswordError').innerText = '*Current password cannot be empty.'
-         isValid = false
-      }
-
-      // New Password validation - Fixed: using correct error element ID
-      if (resetNewPassword === "") {
-         document.getElementById('newPasswordError').innerText = '*New password cannot be empty.'
-         isValid = false
-      } else if (resetNewPassword.length < 6) {
-         document.getElementById('newPasswordError').innerText = '*Password must be at least 6 characters long.'
-         isValid = false
-      } else if (!/[A-Z]/.test(resetNewPassword) || !/[a-z]/.test(resetNewPassword) || !/[0-9]/.test(resetNewPassword) || !/[\W_]/.test(resetNewPassword)) {
-         document.getElementById('newPasswordError').innerText = '*Password must contain uppercase, lowercase, digit, and special character.'
-         isValid = false
-      }
-
-      // Confirm Password validation
-      if (resetConfirmPassword === "") {
-         document.getElementById('resetConfirmPasswordError').innerText = '*Please confirm your password.'
-         isValid = false
-      } else if (resetNewPassword !== resetConfirmPassword) {
-         document.getElementById('resetConfirmPasswordError').innerText = '*Passwords do not match.'
-         isValid = false
-      }
-
-      // Check if new password is same as current password
-      if (currentPassword === resetNewPassword && currentPassword !== "") {
-         document.getElementById('newPasswordError').innerText = '*New password must be different from current password.'
-         isValid = false
-      }
-
-      if (isValid) {
-         console.log('Password Reset:', {
-            currentPassword,
-            resetNewPassword,
-            resetConfirmPassword,
-         })
-
-         // Show success notification
-         showNotification('Password reset successfully!', 'success')
-
-         // Clear form
-         this.reset()
-
-         // Go back to profile
-         setTimeout(() => {
-            backToProfile()
-         }, 1500)
-      }
-   })
+    // Current Password
+    if (currentPassword === "") {
+        document.getElementById('currentPasswordError').innerText = '*Current password cannot be empty.'
+        isValid = false
+    }
+    // New Password
+    if (resetNewPassword === "") {
+        document.getElementById('newPasswordError').innerText = '*New password cannot be empty.'
+        isValid = false
+    } else if (resetNewPassword.length < 6) {
+        document.getElementById('newPasswordError').innerText = '*Password must be at least 6 characters long.'
+        isValid = false
+    } else if (!/[A-Z]/.test(resetNewPassword) || !/[a-z]/.test(resetNewPassword) || !/[0-9]/.test(resetNewPassword) || !/[\W_]/.test(resetNewPassword)) {
+        document.getElementById('newPasswordError').innerText = '*Password must contain uppercase, lowercase, digit, and special character.'
+        isValid = false
+    }
+    // Confirm Password
+    if (resetConfirmPassword === "") {
+        document.getElementById('resetConfirmPasswordError').innerText = '*Please confirm your password.'
+        isValid = false
+    } else if (resetNewPassword !== resetConfirmPassword) {
+        document.getElementById('resetConfirmPasswordError').innerText = '*Passwords do not match.'
+        isValid = false
+    }
+    // New password != Current password
+    if (currentPassword === resetNewPassword && currentPassword !== "") {
+        document.getElementById('newPasswordError').innerText = '*New password must be different from current password.'
+        isValid = false
+    }
+    if (isValid) {
+        showNotification('Password reset successfully!', 'success')
+        this.reset()
+        setTimeout(() => { backToProfile() }, 1500)
+    }
+})
 
 function logout() {
-   if (confirm('Are you sure you want to logout?')) {
-      alert('Logged out successfully!')
-   }
-
+    if (confirm('Are you sure you want to logout?')) {
+        alert('Logged out successfully!')
+    }
+}
     </script>
 </body>
 </html>
