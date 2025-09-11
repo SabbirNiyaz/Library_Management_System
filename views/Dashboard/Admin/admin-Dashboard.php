@@ -73,9 +73,46 @@ if (!isset($_SESSION['email'])) {
 
         <!-- Manage Users & Fines Section -->
         <div id="manageUsers" class="content-section">
-            <!-- ... (your existing code for manageUsers & fines section) ... -->
-            
+            <!-- User List -->
+            <div id="userSection" style="height: 80vh; overflow-y: auto;">
+                <div>
+                    <button class="btn" onclick="showManageUser()" style="margin-bottom: 15px;">
+                    Add New User
+                </button>
+                </div>
+                <h2 style="margin-bottom: 10px;">Manage Users</h2>
+                <table class="user-table">
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userTableBody">
+                        <!-- User rows will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Add User -->
+            <div id="addUserSection" style="height: 80vh; overflow-y: auto; display:none;">
+                <div>
+                    <!-- <button class="btn" onclick="showBackUser()" style="margin-bottom: 15px; 
+                    background:red">
+                    Back
+                </button> -->
+                <button onclick="window.location.href='../../Authentication/index.php'">Add User</button>
+                </div>
+
+                <h2 style="margin-bottom: 10px;">Add New Users</h2>
         </div>
+        </div>
+
+           
+
 
       <!-- Settings Section -->
 <div id="settings" class="content-section">
@@ -268,7 +305,18 @@ if (!isset($_SESSION['email'])) {
     </div>
 
    <script src="../../assets/app/dashboard-Script/admin-Script.js"></script>
-</body>
+   <script>
+// User management
+function showManageUser() {
+    document.getElementById('userSection').style.display = 'none';
+    document.getElementById('addUserSection').style.display = 'block';
+}
+function showBackUser() {
+    document.getElementById('userSection').style.display = 'block';
+    document.getElementById('addUserSection').style.display = 'none';
+    
+}
+   </script>
 </body>
 </html>
 

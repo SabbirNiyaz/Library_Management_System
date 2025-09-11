@@ -24,6 +24,17 @@
             // Redirect or perform logout logic here
         }
 
+// User management
+// function showManageUser() {
+//     document.getElementById('userSection').style.display = 'none';
+//     document.getElementById('addUserSection').style.display = 'block';
+// }
+// function showBackUser() {
+//     document.getElementById('userSection').style.display = 'block';
+//     document.getElementById('addUserSection').style.display = 'none';
+    
+// }
+
         // Edit Profile Modal
 
 // edit button functions // Section show/hide

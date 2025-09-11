@@ -478,6 +478,11 @@
    font-size: small;
 }
 
+/* #manageUsers {
+   height: 100vh; 
+   overflow-y: auto;
+} */
+
         /* Responsive */
         @media (max-width: 768px) {
             .container {
