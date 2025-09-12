@@ -1,5 +1,6 @@
 <?php
-session_start();
+include '../../Authentication/crud.php';
+// session_start();
 if (!isset($_SESSION['email'])) {
     header("Location: ../../Authentication/index.php");
     exit();
@@ -12,6 +13,275 @@ if (!isset($_SESSION['email'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Library Management System</title>
     <link rel="stylesheet" href="../../assets/css/dashboard-style/admin-Style.css">
+    <style>
+        .search-container {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .search-input {
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            width: 300px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        
+        .search-input:focus {
+            border-color: #4a90e2;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+        }
+        
+        .btn-search {
+            background-color: #4a90e2;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-search:hover {
+            background-color: #357abd;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th {
+            background-color: #4a90e2;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+            vertical-align: middle;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        tr:hover {
+            background-color: #e8f4f8;
+        }
+        
+        .operation-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .btnE {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+            padding: 5px 10px;
+        }
+        
+        /* .btnE:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+         */
+        .btnEdit {
+            background-color: #FFC900;
+            color: white;
+        }
+        
+        .btnEdit:hover {
+            background-color: #FF9B00;
+        }
+        
+        .btnDelete {
+            background-color: #FB4141;
+            color: white;
+        }
+        
+        .btnDelete:hover {
+            background-color: #B12C00;
+        }
+        
+        .btnProtected {
+            background-color: #6c757d;
+            color: white;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        
+        .role-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            align-items: center;
+        }
+        
+        .role-admin { 
+            background-color: #dc3545; 
+            color: white; 
+        }
+        .role-librarian { 
+            background-color: #28a745; 
+            color: white; 
+        }
+        .role-student { 
+            background-color: #17a2b8;  
+            color: white; 
+        }
+        
+        .modal {
+            display: none;
+            /* position: fixed; */
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
+        }
+        
+        .modalContent {
+            background-color: white;
+            margin: 10% auto;
+            top: 0%;
+            padding: 25px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        #editUserBtn{
+            background-color: #4a90e2;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: block;
+            width: 30%;
+            margin:15px auto 0px auto;
+        }
+        #editUserBtn:hover {
+            background-color: #357abd;
+
+        }
+        
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            color: black;
+        }
+        
+        .modal h3 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+            color: red;
+        }
+        
+        .modal .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .modal label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        
+        .modal input, .modal select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .modal input:focus, .modal select:focus {
+            border-color: #4a90e2;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+        }
+        
+        .header-title {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .header-title h2 {
+            color: #4a90e2;
+            margin: 0;
+            font-size: 24px;
+        }
+        
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4a90e2;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -83,62 +353,102 @@ if (!isset($_SESSION['email'])) {
         </div>
 
         <h2 style="margin-bottom: 10px;">Manage Users</h2>
-        <table class="user-table">
-            <thead>
-                <tr>
-                    <th>User ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody id="userTableBody">
-                <!-- User rows will be populated here -->
-            </tbody>
-        </table>
+
+            <!-- Search Container -->
+    <div class="search-container">
+        <input type="text" class="search-input" id="searchInput" placeholder="Search by name, email, or role...">
+        <button class="btn-search" onclick="searchTable()"> Search</button>
     </div>
 
-    <div id="addUserSection" style="display: none;">
-        <div class="container">
-            
-            <!-- Register Form -->
-            <div class="form-box" id="register-form">
-                <form id="registerForm" action="login-Register.php" method="post" autocomplete="off" novalidate>
-                    <h2>📚 Library Management System</h2>
-                    <h3>Add New User</h3>
+    <!-- Users Table -->
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Operation</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $display_sql = "SELECT * FROM all_users ORDER BY id DESC";
+            $result = mysqli_query($conn, $display_sql);
+            if(mysqli_num_rows($result) > 0) {
+                while($row = mysqli_fetch_assoc($result)) {
+                    echo "<tr>";
+                    echo "<td><strong>#" . sprintf("%03d", $row['id']) . "</strong></td>";
+                    echo "<td>" . htmlspecialchars($row['name']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['email']) . "</td>";
+                    echo "<td><span class='role-badge role-" . $row['role'] . "'>" . ucfirst($row['role']) . "</span></td>";
+                    echo "<td>";
+                    echo "<div class='operation-buttons'>";
+                    echo "<button class='btnE btnEdit' onclick='editUser(" . $row['id'] . ", \"" . addslashes($row['name']) . "\",
+                     \"" . addslashes($row['email']) . "\", \"" . $row['role'] . "\")'> Edit</button>";
+                    
+                    if ($row['email'] !== 'sabbir@gmail.com') {
+                        echo "<button class='btnE btnDelete' onclick='deleteUser(" . $row['id'] . ", \"" . addslashes($row['name']) . "\")'> Delete</button>";
+                    } else {
+                        echo "<button class='btnE btnProtected' title='Super Admin - Cannot be deleted'> Protected</button>";
+                    }
+                    
+                    echo "</div>";
+                    echo "</td>";
+                    echo "</tr>";
+                }
+            } else {
+                echo "<tr><td colspan='5' style='text-align: center; padding: 30px; color: #666;'> No users found</td></tr>";
+            }
+            ?>
+        </tbody>
+    </table>
 
-                    <input type="text" name="name" id="name" placeholder="Name" required>
-                    <div class="error" id="nameError"></div>
 
-                    <input type="email" name="email" id="email" placeholder="Email" required>
-                    <div class="error" id="emailError"></div>
+    <!-- Edit User Modal -->
+<div id="editModal" class="modal">
+    <div class="modalContent">
+        <span class="close" onclick="closeEditModal()">&times;</span>
+        <h3>Edit User </h3>
+        <form action="" method="post" id="editForm">
+            <input type="hidden" name="edit_id" id="edit_id">
 
-                    <input type="password" name="password" id="password" placeholder="Password" required>
-                    <div class="error" id="passwordError"></div>
-
-                    <select name="role" id="role" required>
-                        <option value="">Select Role</option>
-                        <option value="student">Student</option>
-                        <option value="librarian">Librarian</option>
-                        <option value="admin">Admin</option>
-                    </select>
-                    <div class="error" id="roleError"></div>
-
-                    <button type="submit" name="register">Register</button>
-                </form>
-
-                <div>
-                    <button class="btn" onclick="showManageUsers()" 
-                        style="margin-top: 20px; background-color: red;">
-                        Back
-                    </button>
-                </div>
+            <div class="form-group">
+                <label>Full Name:</label>
+                <input type="text" name="edit_name" id="edit_name" required>
+                <span id="editNameError" class="error-message" style="color:red;"></span>
             </div>
 
-        </div>
-    </div>
+            <div class="form-group">
+                <label>Email Address:</label>
+                <input type="email" name="edit_email" id="edit_email" required>
+                <span id="editEmailError" class="error-message" style="color:red;"></span>
+            </div>
 
+            <div class="form-group">
+                <label>Password (Leave blank to keep current):</label>
+                <input type="password" name="edit_password" id="edit_password" minlength="6">
+                <small style="color: #666; font-size: 12px;">Only enter if you want to change the password</small>
+                <span id="editPasswordError" class="error-message" style="color:red;"></span>
+            </div>
+
+            <div class="form-group">
+                <label>User Role:</label>
+                <select name="edit_role" id="edit_role" required>
+                    <option value="">Select Role</option>
+                    <option value="admin">Admin</option>
+                    <option value="librarian">Librarian</option>
+                    <option value="student">Student</option>
+                </select>
+                <span id="editRoleError" class="error-message" style="color:red;"></span>
+            </div>
+
+            <input type="submit" id="editUserBtn" value=" Update User">
+        </form>
+    </div>
+</div>
+
+    </div>
 </div>
 
 
@@ -336,7 +646,7 @@ if (!isset($_SESSION['email'])) {
     </div>
 
    <script src="../../assets/app/dashboard-Script/admin-Script.js"></script>
-   <script src="../../assets/app/"></script>
+
 <script>
 // Show user list and hide the add-user form
 function showManageUsers() {
@@ -350,6 +660,143 @@ function showRegisterForm() {
     document.getElementById('addUserSection').style.display = 'block';
 }
 </script>
+
+    <script>
+        function editUser(id, name, email, role) {
+            document.getElementById('edit_id').value = id;
+            document.getElementById('edit_name').value = name;
+            document.getElementById('edit_email').value = email;
+            document.getElementById('edit_role').value = role;
+            document.getElementById('edit_password').value = '';
+            document.getElementById('editModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeEditModal() {
+            document.getElementById('editModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        function deleteUser(id, name) {
+            if (confirm(' Are you sure you want to delete this user?\n\nName: ' + name + '\n\nThis action cannot be undone!')) {
+                const form = document.createElement('form');
+                form.method = 'post';
+                form.innerHTML = '<input type="hidden" name="delete_id" value="' + id + '">';
+                document.body.appendChild(form);
+                form.submit();
+            }
+        }
+        
+        function searchTable() {
+            const searchInput = document.getElementById('searchInput');
+            const searchTerm = searchInput.value.toLowerCase();
+            const table = document.querySelector('table tbody');
+            const rows = table.getElementsByTagName('tr');
+            
+            for (let i = 0; i < rows.length; i++) {
+                const row = rows[i];
+                if (row.cells.length > 1) {
+                    const name = row.cells[1].textContent.toLowerCase();
+                    const email = row.cells[2].textContent.toLowerCase();
+                    const role = row.cells[3].textContent.toLowerCase();
+                    
+                    if (name.includes(searchTerm) || email.includes(searchTerm) || role.includes(searchTerm) || searchTerm === '') {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                }
+            }
+        }
+        
+        // Real-time search as user types
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', searchTable);
+        });
+        
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('editModal');
+            if (event.target == modal) {
+                closeEditModal();
+            }
+        }
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeEditModal();
+            }
+        });
+        
+        // Form validation
+
+        // Edit Form Validation with inline error messages
+    document.getElementById('editForm').addEventListener('submit', function(e) {
+        let isValid = true;
+
+        // Get input values
+        const name = document.getElementById('edit_name').value.trim();
+        const email = document.getElementById('edit_email').value.trim();
+        const password = document.getElementById('edit_password').value;
+        const role = document.getElementById('edit_role').value;
+
+        // Get error spans
+        const nameError = document.getElementById('editNameError');
+        const emailError = document.getElementById('editEmailError');
+        const passwordError = document.getElementById('editPasswordError');
+        const roleError = document.getElementById('editRoleError');
+
+        // Clear previous errors
+        nameError.innerText = '';
+        emailError.innerText = '';
+        passwordError.innerText = '';
+        roleError.innerText = '';
+
+        // Name validation
+    if (name === "") {
+        nameError.innerText = '*Name cannot be empty.';
+        isValid = false;
+    } else if (!/^[a-zA-Z\s]{2,}$/.test(name)) {
+        nameError.innerText = '*Please enter a valid name (at least 2 letters, letters and spaces only).';
+        isValid = false;
+    }
+
+    // Email validation
+    if (email === "") {
+        emailError.innerText = '*Email cannot be empty.';
+        isValid = false;
+    } else if (!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(email)) {
+        emailError.innerText = '*Please enter a valid email address.';
+        isValid = false;
+    }
+
+    // Password validation (optional if left blank)
+    if (password !== "") {
+        if (password.length < 6) {
+            passwordError.innerText = '*Password must be at least 6 characters long.';
+            isValid = false;
+        } else if (!/[A-Z]/.test(password) || !/[a-z]/.test(password) || !/[0-9]/.test(password) || !/[\W_]/.test(password)) {
+            passwordError.innerText = '*Password must contain uppercase, lowercase, digit, and special character.';
+            isValid = false;
+        }
+    }
+
+    // Role validation
+    if (role === "") {
+        roleError.innerText = '*Please select a role.';
+        isValid = false;
+    }
+
+    // Only prevent form submission if validation fails
+    if (!isValid) {
+        e.preventDefault();
+    }
+});
+
+    console.log('User Management System Loaded Successfully!');
+    </script>
 
 </body>
 </html>
