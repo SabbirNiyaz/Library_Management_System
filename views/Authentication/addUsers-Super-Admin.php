@@ -28,29 +28,12 @@ function showActiveForm($formName, $activeForm) {
 </head>
 <body>
     <div class="container">
-        <!-- Login Form -->
-        <div class="form-box <?= showActiveForm('login', $activeForm); ?>" id="login-form">
-            <form id="loginForm" action="login-Register.php" method="post" autocomplete="off" novalidate>
-                <h2>📚 Library Management System</h2>
-                <h3>Login</h3>
-                <?= showForm($errors['login']); ?>
-                <input type="email" name="email" id="loginEmail" placeholder="Email" required>
-                <div class="error" id="loginEmailError"></div>
-                <input type="password" name="password" id="loginPassword" placeholder="Password" required>
-                <div class="error" id="loginPasswordError"></div>
-                <button type="submit" name="login">Login</button>
-                <p>Don't have an account? <a href="#" onclick="showRegisterForm()">Register</a></p>
-                <div>
-                    <p id="forgotPassword"><a href="#">Forgot Password?</a></p>
-                </div>
-            </form>
-        </div>
-
         <!-- Register Form -->
-        <div class="form-box <?= showActiveForm('register', $activeForm); ?>" id="register-form" style="display: none;">
+        <div class="form-box <?= showActiveForm('register', $activeForm); ?>" id="register-form" style="display: block;">
             <form id="registerForm" action="login-Register.php" method="post" autocomplete="off" novalidate>
                 <h2>📚 Library Management System</h2>
-                <h3>Register</h3>
+                <h3>Add New User</h3>
+                <p><strong style="color: #DC3C22;">Super</strong> Administrator Panel</p>
                 <?= showForm($errors['register']); ?>
                 <input type="text" name="name" id="name" placeholder="Name" required>
                 <div class="error" id="nameError"></div>
@@ -61,16 +44,18 @@ function showActiveForm($formName, $activeForm) {
                 <select name="role" id="role" required>
                     <option value="">Select Role</option>
                     <option value="student">Student</option>
-                    <!-- <option value="librarian">Librarian</option>
-                    <option value="admin">Admin</option> -->
+                    <option value="librarian">Librarian</option>
+                    <option value="admin">Admin</option>
                 </select>
                 <div class="error" id="roleError"></div>
                 <button type="submit" name="register">Register</button>
-                <p>Already have an account? <a href="#" onclick="showLoginForm()">Login</a></p>
             </form>
+            <button style="background-color: #DC3C22;"
+            onclick="window.location.href='../Dashboard/Admin/admin-Dashboard.php'">Back</button>
         </div>
     </div>
-    <!-- <script src="/views/assets/app/auth-Script/login-Register-Form.js"></script> -->
+
      <script src="../assets/app/auth-Script/login-Register-Form.js"></script>
+
 </body>
 </html>

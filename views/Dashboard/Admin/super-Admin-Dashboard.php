@@ -5,14 +5,13 @@ if (!isset($_SESSION['email'])) {
     exit();
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Librarian Dashboard - Library Management System</title>
-    <link rel="stylesheet" href="../../assets/css/dashboard-style/librarian-Style.css">
+    <title>Admin Dashboard - Library Management System</title>
+    <link rel="stylesheet" href="../../assets/css/dashboard-style/admin-Style.css">
 </head>
 <body>
     <div class="container">
@@ -20,39 +19,40 @@ if (!isset($_SESSION['email'])) {
         <div class="header">
             <div class="logo">
                 <h2>📚 Library Management System</h2>
-                <p>Librarian Portal</p>
+                <p>Administrator Dashboard</p>
             </div>
-            <div class="librarian-info">
-                <div class="librarian-avatar">L</div>
+            <div class="admin-info">
+                <div class="admin-avatar">A</div>
                 <div>
                     <strong><?= $_SESSION['name']; ?></strong><br>
-                    <small>Senior Librarian</small>
+                    <small><strong style="color: #DC3C22;">Super</strong> Administrator</small>
                 </div>
-                <button class="logout-btn" onclick="window.location.href='../../Authentication/logout.php'">Logout</button>
+                <button class="logout-btn" 
+                onclick="window.location.href='../../Authentication/logout.php'">Logout</button>
             </div>
         </div>
 
         <!-- Stats Overview -->
         <div class="stats-grid">
-            <div class="stat-card books">
-                <div class="stat-number" id="totalBooks">1,000</div>
-                <div class="stat-label">Total Books</div>
-            </div>
-        <div class="stat-card manageUsers">
-                <div class="stat-number" id="manageUsersNumber">10</div>
+            <div class="stat-card users">
+                <div class="stat-number" id="totalUsers">156</div>
                 <div class="stat-label">Total Users</div>
             </div>
+            <div class="stat-card books">
+                <div class="stat-number" id="totalBooks">1,247</div>
+                <div class="stat-label">Total Books</div>
+            </div>
             <div class="stat-card issued">
-                <div class="stat-number" id="booksIssued">100</div>
+                <div class="stat-number" id="issuedBooks">89</div>
                 <div class="stat-label">Books Issued</div>
             </div>
-            <div class="stat-card returned">
-                <div class="stat-number" id="todayReturns">10</div>
-                <div class="stat-label">Today's Returns</div>
+            <div class="stat-card overdue">
+                <div class="stat-number" id="overdueBooks">12</div>
+                <div class="stat-label">Overdue Books</div>
             </div>
         </div>
 
-        <!-- Navigation Tabs -->
+    <!-- Navigation Tabs -->
         <div class="nav-tabs">
             <button class="nav-tab active" onclick="showSection('circulation')">🏠 Home</button>
             <button class="nav-tab" onclick="showSection('books')">📚 Manage Books</button>
@@ -71,14 +71,14 @@ if (!isset($_SESSION['email'])) {
             <!-- ... (your existing code for books management section) ... -->
         </div>
 
-        <!-- Manage Users & Fines Section -->
-
-        <div id="manageUsers" class="content-section">
-            <!-- User List -->
+<!-- Manage Users & Fines Section -->
+<div id="manageUsers" class="content-section">
+    
+    <!-- User List -->
     <div id="userSection" style="height: 80vh; overflow-y: auto;">
         <div>
-            <button class="btn" onclick="window.location.href='../../Authentication/addUsers-Librarian.php'" style="margin-bottom: 15px;">
-                Add New Student
+            <button class="btn" onclick="window.location.href='../../Authentication/addUsers-Super-Admin.php'" style="margin-bottom: 15px;">
+                Add New User
             </button>
         </div>
 
@@ -98,8 +98,52 @@ if (!isset($_SESSION['email'])) {
             </tbody>
         </table>
     </div>
+
+    <div id="addUserSection" style="display: none;">
+        <div class="container">
             
+            <!-- Register Form -->
+            <div class="form-box" id="register-form">
+                <form id="registerForm" action="login-Register.php" method="post" autocomplete="off" novalidate>
+                    <h2>📚 Library Management System</h2>
+                    <h3>Add New User</h3>
+
+                    <input type="text" name="name" id="name" placeholder="Name" required>
+                    <div class="error" id="nameError"></div>
+
+                    <input type="email" name="email" id="email" placeholder="Email" required>
+                    <div class="error" id="emailError"></div>
+
+                    <input type="password" name="password" id="password" placeholder="Password" required>
+                    <div class="error" id="passwordError"></div>
+
+                    <select name="role" id="role" required>
+                        <option value="">Select Role</option>
+                        <option value="student">Student</option>
+                        <option value="librarian">Librarian</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                    <div class="error" id="roleError"></div>
+
+                    <button type="submit" name="register">Register</button>
+                </form>
+
+                <div>
+                    <button class="btn" onclick="showManageUsers()" 
+                        style="margin-top: 20px; background-color: red;">
+                        Back
+                    </button>
+                </div>
+            </div>
+
         </div>
+    </div>
+
+</div>
+
+
+           
+
 
       <!-- Settings Section -->
 <div id="settings" class="content-section">
@@ -137,7 +181,7 @@ if (!isset($_SESSION['email'])) {
         </button>
     </div>
 
-        <!-- Update Profile -->
+    <!-- Update Profile -->
     <div
         id="editProfile"
         class="update-profile-container section hidden"
@@ -291,6 +335,24 @@ if (!isset($_SESSION['email'])) {
         <!-- ... (your existing code for add book modal) ... -->
     </div>
 
-    <script src="../../assets/app/dashboard-Script/librarian-Script.js"></script>
+   <script src="../../assets/app/dashboard-Script/admin-Script.js"></script>
+   <script src="../../assets/app/"></script>
+<script>
+// Show user list and hide the add-user form
+function showManageUsers() {
+    document.getElementById('userSection').style.display = 'block';
+    document.getElementById('addUserSection').style.display = 'none';
+}
+
+// Show add-user form and hide the user list
+function showRegisterForm() {
+    document.getElementById('userSection').style.display = 'none';
+    document.getElementById('addUserSection').style.display = 'block';
+}
+</script>
+
 </body>
 </html>
+
+
+               

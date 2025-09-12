@@ -33,6 +33,7 @@ function showActiveForm($formName, $activeForm) {
             <form id="registerForm" action="login-Register.php" method="post" autocomplete="off" novalidate>
                 <h2>📚 Library Management System</h2>
                 <h3>Add New User</h3>
+                <p>Administrator Panel</p>
                 <?= showForm($errors['register']); ?>
                 <input type="text" name="name" id="name" placeholder="Name" required>
                 <div class="error" id="nameError"></div>
@@ -44,14 +45,13 @@ function showActiveForm($formName, $activeForm) {
                     <option value="">Select Role</option>
                     <option value="student">Student</option>
                     <option value="librarian">Librarian</option>
-                    <option value="admin">Admin</option>
+                    <!-- <option value="admin">Admin</option> -->
                 </select>
                 <div class="error" id="roleError"></div>
                 <button type="submit" name="register">Register</button>
             </form>
             <button style="background-color: #DC3C22;"
             onclick="window.location.href='../Dashboard/Admin/admin-Dashboard.php'">Back</button>
-            <p>Administrator Panel</p>
         </div>
     </div>
 

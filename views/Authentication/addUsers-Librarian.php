@@ -33,6 +33,7 @@ function showActiveForm($formName, $activeForm) {
             <form id="registerForm" action="login-Register.php" method="post" autocomplete="off" novalidate>
                 <h2>📚 Library Management System</h2>
                 <h3>Add New User</h3>
+                 <p>Librarian Panel</p>
                 <?= showForm($errors['register']); ?>
                 <input type="text" name="name" id="name" placeholder="Name" required>
                 <div class="error" id="nameError"></div>

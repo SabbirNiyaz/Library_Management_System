@@ -32,8 +32,14 @@ if (isset($_POST['login'])) {
             $_SESSION['email'] = $user['email'];
             
             if ($user['role'] === 'admin') {
+                
+                if ($user['email'] === 'sabbir@gmail.com') {
+                    header("Location: ../Dashboard/Admin/super-Admin-Dashboard.php");
+                    // sabbir@gmail.com  X7q!pR9v@2Lm#dW4
+                }
+                else {  
                 header("Location: ../Dashboard/Admin/admin-Dashboard.php");
-                // sabbir@gmail.com  X7q!pR9v@2Lm#dW4
+                }
 
             } 
             else if ($user['role'] === 'librarian') {
