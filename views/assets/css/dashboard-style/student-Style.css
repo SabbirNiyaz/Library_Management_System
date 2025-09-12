@@ -64,6 +64,20 @@ body {
    background: #c82333;
 }
 
+
+.student-avatar {
+            width: 45px;
+            height: 45px;
+            background: #3D74B6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+}
+
+
 /* Stats Cards */
 .stats {
    display: grid;

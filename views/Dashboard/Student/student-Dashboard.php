@@ -24,6 +24,19 @@ if (!isset($_SESSION['email'])) {
                <p>Student Dashboard</p>
             </div>
             <div class="user-info">
+               <div class="student-avatar"
+
+            style=" width: 45px;
+            height: 45px;
+            background: #3D74B6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;" 
+
+               >S</div>
                <div>
                   <strong><?= $_SESSION['name']; ?></strong><br/>
                   <small><?= $_SESSION['email']; ?></small>
