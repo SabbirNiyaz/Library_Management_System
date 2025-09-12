@@ -72,8 +72,32 @@ if (!isset($_SESSION['email'])) {
         </div>
 
         <!-- Manage Users & Fines Section -->
+
         <div id="manageUsers" class="content-section">
-            <!-- ... (your existing code for manageUsers & fines section) ... -->
+            <!-- User List -->
+    <div id="userSection" style="height: 80vh; overflow-y: auto;">
+        <div>
+            <button class="btn" onclick="window.location.href='../../Authentication/addUsers-Librarian.php'" style="margin-bottom: 15px;">
+                Add New Student
+            </button>
+        </div>
+
+        <h2 style="margin-bottom: 10px;">Manage Users</h2>
+        <table class="user-table">
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="userTableBody">
+                <!-- User rows will be populated here -->
+            </tbody>
+        </table>
+    </div>
             
         </div>
 

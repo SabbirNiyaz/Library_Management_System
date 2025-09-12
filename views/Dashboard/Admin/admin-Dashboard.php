@@ -71,45 +71,76 @@ if (!isset($_SESSION['email'])) {
             <!-- ... (your existing code for books management section) ... -->
         </div>
 
-        <!-- Manage Users & Fines Section -->
-        <div id="manageUsers" class="content-section">
-            <!-- User List -->
-            <div id="userSection" style="height: 80vh; overflow-y: auto;">
+<!-- Manage Users & Fines Section -->
+<div id="manageUsers" class="content-section">
+    
+    <!-- User List -->
+    <div id="userSection" style="height: 80vh; overflow-y: auto;">
+        <div>
+            <button class="btn" onclick="window.location.href='../../Authentication/addUsers-Admin.php'" style="margin-bottom: 15px;">
+                Add New User
+            </button>
+        </div>
+
+        <h2 style="margin-bottom: 10px;">Manage Users</h2>
+        <table class="user-table">
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="userTableBody">
+                <!-- User rows will be populated here -->
+            </tbody>
+        </table>
+    </div>
+
+    <div id="addUserSection" style="display: none;">
+        <div class="container">
+            
+            <!-- Register Form -->
+            <div class="form-box" id="register-form">
+                <form id="registerForm" action="login-Register.php" method="post" autocomplete="off" novalidate>
+                    <h2>📚 Library Management System</h2>
+                    <h3>Add New User</h3>
+
+                    <input type="text" name="name" id="name" placeholder="Name" required>
+                    <div class="error" id="nameError"></div>
+
+                    <input type="email" name="email" id="email" placeholder="Email" required>
+                    <div class="error" id="emailError"></div>
+
+                    <input type="password" name="password" id="password" placeholder="Password" required>
+                    <div class="error" id="passwordError"></div>
+
+                    <select name="role" id="role" required>
+                        <option value="">Select Role</option>
+                        <option value="student">Student</option>
+                        <option value="librarian">Librarian</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                    <div class="error" id="roleError"></div>
+
+                    <button type="submit" name="register">Register</button>
+                </form>
+
                 <div>
-                    <button class="btn" onclick="showManageUser()" style="margin-bottom: 15px;">
-                    Add New User
-                </button>
+                    <button class="btn" onclick="showManageUsers()" 
+                        style="margin-top: 20px; background-color: red;">
+                        Back
+                    </button>
                 </div>
-                <h2 style="margin-bottom: 10px;">Manage Users</h2>
-                <table class="user-table">
-                    <thead>
-                        <tr>
-                            <th>User ID</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Role</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="userTableBody">
-                        <!-- User rows will be populated here -->
-                    </tbody>
-                </table>
             </div>
 
-            <!-- Add User -->
-            <div id="addUserSection" style="height: 80vh; overflow-y: auto; display:none;">
-                <div>
-                    <!-- <button class="btn" onclick="showBackUser()" style="margin-bottom: 15px; 
-                    background:red">
-                    Back
-                </button> -->
-                <button onclick="window.location.href='../../Authentication/index.php'">Add User</button>
-                </div>
+        </div>
+    </div>
 
-                <h2 style="margin-bottom: 10px;">Add New Users</h2>
-        </div>
-        </div>
+</div>
+
 
            
 
@@ -305,18 +336,21 @@ if (!isset($_SESSION['email'])) {
     </div>
 
    <script src="../../assets/app/dashboard-Script/admin-Script.js"></script>
-   <script>
-// User management
-function showManageUser() {
+   <script src="../../assets/app/"></script>
+<script>
+// Show user list and hide the add-user form
+function showManageUsers() {
+    document.getElementById('userSection').style.display = 'block';
+    document.getElementById('addUserSection').style.display = 'none';
+}
+
+// Show add-user form and hide the user list
+function showRegisterForm() {
     document.getElementById('userSection').style.display = 'none';
     document.getElementById('addUserSection').style.display = 'block';
 }
-function showBackUser() {
-    document.getElementById('userSection').style.display = 'block';
-    document.getElementById('addUserSection').style.display = 'none';
-    
-}
-   </script>
+</script>
+
 </body>
 </html>
 
