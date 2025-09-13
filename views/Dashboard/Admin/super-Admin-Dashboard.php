@@ -607,54 +607,14 @@ h3{
         style="display:none;"
     >
         <h2>Edit Name and Password</h2>
-        <!-- <form id="updateProfileForm" autocomplete="off" novalidate>
-            <div class="form-group">
-                <label for="name">New Name</label>
-                <input
-                    type="text"
-                    id="name"
-                    placeholder="Enter your name"
-                    required
-                />
-                <div class="error" id="nameError"></div>
-            </div>
-            <div class="form-group">
-                <label for="newPassword">New Password</label>
-                <input
-                    type="password"
-                    id="newPassword"
-                    placeholder="Enter a new password"
-                    required
-                />
-                <div class="error" id="newPasswordError"></div>
-            </div>
-            <div class="form-group">
-                <label for="confirmPassword">Confirm Password</label>
-                <input
-                    type="password"
-                    id="confirmPassword"
-                    placeholder="Confirm password"
-                    required
-                />
-                <div class="error" id="confirmPasswordError"></div>
-            </div>
-            <div class="form-group">
-                <label for="oldPassword">Current Password</label>
-                <input
-                    type="password"
-                    id="oldPassword"
-                    placeholder="Enter your old password"
-                    required
-                />
-                <div class="error" id="oldPasswordError"></div>
-            </div>
 
-            <button type="submit" class="btn">Update</button>
-        </form> -->
         <?php
-        include '../../Authentication/settings.php';
-        ?>
-        <form id="updateProfileForm" autocomplete="off" novalidate>
+include '../../Authentication/settings.php';
+?>
+<!-- Alert Message -->
+        <div id="alertMessage" class="alert"></div>
+        
+<form id="updateProfileForm" autocomplete="off" novalidate>
             <div class="form-group">
                 <label for="name">New Name</label>
                 <input
@@ -1032,6 +992,190 @@ document.getElementById('userForm').addEventListener('submit', function(e) {
 });
 
 console.log('Add Users Successfully!');
+    </script>
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('updateProfileForm');
+            const nameField = document.getElementById('name');
+            const newPasswordField = document.getElementById('newPassword');
+            const confirmPasswordField = document.getElementById('confirmPassword');
+            const oldPasswordField = document.getElementById('oldPassword');
+            const updateBtn = document.getElementById('updateBtn');
+            const strengthBar = document.getElementById('strengthBar');
+            const alertMessage = document.getElementById('alertMessage');
+
+            // Password strength checker
+            function checkPasswordStrength(password) {
+                let strength = 0;
+                if (password.length >= 6) strength++;
+                if (password.match(/[a-z]/)) strength++;
+                if (password.match(/[A-Z]/)) strength++;
+                if (password.match(/[0-9]/)) strength++;
+                if (password.match(/[^A-Za-z0-9]/)) strength++;
+                
+                return strength;
+            }
+
+            // Update password strength bar
+            newPasswordField.addEventListener('input', function() {
+                const password = this.value;
+                const strength = checkPasswordStrength(password);
+                
+                strengthBar.className = 'password-strength-bar';
+                
+                if (password.length === 0) {
+                    strengthBar.style.width = '0%';
+                } else if (strength <= 1) {
+                    strengthBar.classList.add('strength-weak');
+                } else if (strength <= 2) {
+                    strengthBar.classList.add('strength-fair');
+                } else if (strength <= 3) {
+                    strengthBar.classList.add('strength-good');
+                } else {
+                    strengthBar.classList.add('strength-strong');
+                }
+            });
+
+            // Real-time validation
+            function validateField(field, errorElement, validationFunc) {
+                field.addEventListener('blur', function() {
+                    const error = validationFunc(this.value);
+                    if (error) {
+                        this.classList.add('error');
+                        this.classList.remove('success');
+                        errorElement.textContent = error;
+                        errorElement.classList.add('show');
+                    } else {
+                        this.classList.remove('error');
+                        this.classList.add('success');
+                        errorElement.classList.remove('show');
+                    }
+                });
+
+                field.addEventListener('input', function() {
+                    if (this.classList.contains('error')) {
+                        const error = validationFunc(this.value);
+                        if (!error) {
+                            this.classList.remove('error');
+                            this.classList.add('success');
+                            errorElement.classList.remove('show');
+                        }
+                    }
+                });
+            }
+
+            // Validation functions
+            validateField(nameField, document.getElementById('nameError'), function(value) {
+                if (!value.trim()) return 'Name is required';
+                if (value.trim().length < 2) return 'Name must be at least 2 characters';
+                if (value.trim().length > 50) return 'Name must be less than 50 characters';
+                return null;
+            });
+
+            validateField(newPasswordField, document.getElementById('newPasswordError'), function(value) {
+                if (!value) return 'New password is required';
+                if (value.length < 6) return 'Password must be at least 6 characters';
+                if (value.length > 100) return 'Password must be less than 100 characters';
+                return null;
+            });
+
+            validateField(confirmPasswordField, document.getElementById('confirmPasswordError'), function(value) {
+                if (!value) return 'Please confirm your password';
+                if (value !== newPasswordField.value) return 'Passwords do not match';
+                return null;
+            });
+
+            validateField(oldPasswordField, document.getElementById('oldPasswordError'), function(value) {
+                if (!value) return 'Current password is required';
+                return null;
+            });
+
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Clear previous errors
+                document.querySelectorAll('.error').forEach(error => error.classList.remove('show'));
+                document.querySelectorAll('input').forEach(input => {
+                    input.classList.remove('error', 'success');
+                });
+
+                // Show loading state
+                updateBtn.classList.add('loading');
+                updateBtn.disabled = true;
+
+                // Prepare form data
+                const formData = new FormData();
+                formData.append('action', 'update_profile');
+                formData.append('name', nameField.value.trim());
+                formData.append('newPassword', newPasswordField.value);
+                formData.append('confirmPassword', confirmPasswordField.value);
+                formData.append('oldPassword', oldPasswordField.value);
+
+                // Submit form
+                fetch('', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showAlert('Profile updated successfully! 🎉', 'success');
+                        form.reset();
+                        
+                        // Update current info display
+                        document.querySelector('.info-value').textContent = nameField.value.trim();
+                        
+                        // Reset password strength bar
+                        strengthBar.style.width = '0%';
+                        strengthBar.className = 'password-strength-bar';
+                        
+                        // Optionally redirect after success
+                        setTimeout(() => {
+                            // window.location.href = 'dashboard.php';
+                        }, 2000);
+                    } else {
+                        if (data.errors) {
+                            // Show field-specific errors
+                            Object.keys(data.errors).forEach(field => {
+                                const errorElement = document.getElementById(field + 'Error');
+                                const inputElement = document.getElementById(field === 'newPassword' ? 'newPassword' : field);
+                                
+                                if (errorElement && inputElement) {
+                                    errorElement.textContent = data.errors[field];
+                                    errorElement.classList.add('show');
+                                    inputElement.classList.add('error');
+                                }
+                            });
+                        } else {
+                            showAlert(data.message || 'An error occurred. Please try again.', 'error');
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    // showAlert('Network error. Please try again.', 'error');
+                })
+                .finally(() => {
+                    // Hide loading state
+                    updateBtn.classList.remove('loading');
+                    updateBtn.disabled = false;
+                });
+            });
+
+            // Show alert function
+            function showAlert(message, type) {
+                alertMessage.textContent = message;
+                alertMessage.className = `alert ${type} show`;
+                
+                // Auto-hide after 5 seconds
+                setTimeout(() => {
+                    alertMessage.classList.remove('show');
+                }, 5000);
+            }
+
+            console.log('🎉 Profile Update System Loaded Successfully!');
+        });
     </script>
 
 </body>

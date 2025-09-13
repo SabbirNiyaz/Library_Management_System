@@ -378,26 +378,6 @@ $current_user = $result->fetch_assoc();
             <h2>Update Profile</h2>
             <p>Manage your account information</p>
         </div>
-
-        <!-- Current User Info -->
-        <div class="current-info">
-            <h3>Current Information</h3>
-            <div class="info-item">
-                <span class="info-label">Name:</span>
-                <span class="info-value"><?php echo htmlspecialchars($current_user['name']); ?></span>
-            </div>
-            <div class="info-item">
-                <span class="info-label">Email:</span>
-                <span class="info-value"><?php echo htmlspecialchars($current_user['email']); ?></span>
-            </div>
-            <div class="info-item">
-                <span class="info-label">Role:</span>
-                <span class="role-badge role-<?php echo $current_user['role']; ?>">
-                    <?php echo ucfirst($current_user['role']); ?>
-                </span>
-            </div>
-        </div>
-
         <!-- Alert Message -->
         <div id="alertMessage" class="alert"></div>
 
