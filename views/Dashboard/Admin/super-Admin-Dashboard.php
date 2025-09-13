@@ -607,7 +607,7 @@ h3{
         style="display:none;"
     >
         <h2>Edit Name and Password</h2>
-        <form id="updateProfileForm" autocomplete="off" novalidate>
+        <!-- <form id="updateProfileForm" autocomplete="off" novalidate>
             <div class="form-group">
                 <label for="name">New Name</label>
                 <input
@@ -650,6 +650,67 @@ h3{
             </div>
 
             <button type="submit" class="btn">Update</button>
+        </form> -->
+        <?php
+        include '../../Authentication/settings.php';
+        ?>
+        <form id="updateProfileForm" autocomplete="off" novalidate>
+            <div class="form-group">
+                <label for="name">New Name</label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Enter your name"
+                    value="<?php echo htmlspecialchars($current_user['name']); ?>"
+                    required
+                />
+                <div class="error" id="nameError"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="newPassword">New Password</label>
+                <input
+                    type="password"
+                    id="newPassword"
+                    name="newPassword"
+                    placeholder="Enter a new password"
+                    required
+                />
+                <div class="password-strength">
+                    <div class="password-strength-bar" id="strengthBar"></div>
+                </div>
+                <div class="error" id="newPasswordError"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    placeholder="Confirm password"
+                    required
+                />
+                <div class="error" id="confirmPasswordError"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="oldPassword">Current Password</label>
+                <input
+                    type="password"
+                    id="oldPassword"
+                    name="oldPassword"
+                    placeholder="Enter your current password"
+                    required
+                />
+                <div class="error" id="oldPasswordError"></div>
+            </div>
+            
+            <button type="submit" class="btn" id="updateBtn">
+                <div class="loading"></div>
+                <span class="btn-text">Update Profile</span>
+            </button>
         </form>
         <button
             id="backToProfileButton"

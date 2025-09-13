@@ -87,7 +87,8 @@ function showNotification(message, type) {
 }
 
 // Update Profile Form
-document.getElementById('updateProfileForm').addEventListener('submit', function (e) {
+// document.getElementById('updateProfileForm').addEventListener('submit', function (e) {
+document.getElementById('editForm').addEventListener('submit', function (e) {
     e.preventDefault()
     clearAllErrorMessages()
     let name = document.getElementById('name').value.trim()
