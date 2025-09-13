@@ -361,21 +361,28 @@ h3{
 
         <!-- Stats Overview -->
         <div class="stats-grid">
+            <?php
+        // Get user statistics
+        $total_users = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM all_users"));
+        $total_admins = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM all_users WHERE role='admin'"));
+        $total_librarians = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM all_users WHERE role='librarian'"));
+        $total_students = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM all_users WHERE role='student'"));
+        ?>
             <div class="stat-card users">
-                <div class="stat-number" id="totalUsers">156</div>
+                <div class="stat-number"><?php echo $total_users;?></div>
                 <div class="stat-label">Total Users</div>
             </div>
             <div class="stat-card books">
-                <div class="stat-number" id="totalBooks">1,247</div>
-                <div class="stat-label">Total Books</div>
+                <div class="stat-number"><?php echo $total_students;?></div>
+                <div class="stat-label">Total Students</div>
             </div>
             <div class="stat-card issued">
-                <div class="stat-number" id="issuedBooks">89</div>
-                <div class="stat-label">Books Issued</div>
+                <div class="stat-number"><?php echo $total_librarians;?></div>
+                <div class="stat-label">Total Librarians</div>
             </div>
             <div class="stat-card overdue">
-                <div class="stat-number" id="overdueBooks">12</div>
-                <div class="stat-label">Overdue Books</div>
+                <div class="stat-number" id="overdueBooks">1000</div>
+                <div class="stat-label">Total Books</div>
             </div>
         </div>
 
@@ -441,6 +448,7 @@ h3{
             $result = mysqli_query($conn, $display_sql);
             if(mysqli_num_rows($result) > 0) {
                 while($row = mysqli_fetch_assoc($result)) {
+                    if($row['role'] !== 'admin'){
                     echo "<tr>";
                     echo "<td><strong>#" . sprintf("%03d", $row['id']) . "</strong></td>";
                     echo "<td>" . htmlspecialchars($row['name']) . "</td>";
@@ -448,19 +456,23 @@ h3{
                     echo "<td><span class='role-badge role-" . $row['role'] . "'>" . ucfirst($row['role']) . "</span></td>";
                     echo "<td>";
                     echo "<div class='operation-buttons'>";
-                    echo "<button class='btnE btnEdit' onclick='editUser(" . $row['id'] . ", \"" . addslashes($row['name']) . "\",
+                    if ($row['role'] !== 'admin') {
+                        echo "<button class='btnE btnEdit' onclick='editUser(" . $row['id'] . ", \"" . addslashes($row['name']) . "\",
                      \"" . addslashes($row['email']) . "\", \"" . $row['role'] . "\")'> Edit</button>";
+                    } else {
+                        echo "<button class='btnE btnProtected' title='Admin - Cannot be editable'> Protected</button>";
+                    }
                     
-                    if ($row['email'] !== 'sabbir@gmail.com') {
+                    if ($row['role'] !== 'admin') {
                         echo "<button class='btnE btnDelete' onclick='deleteUser(" . $row['id'] . ", \"" . addslashes($row['name']) . "\")'> Delete</button>";
                     } else {
-                        echo "<button class='btnE btnProtected' title='Super Admin - Cannot be deleted'> Protected</button>";
+                        echo "<button class='btnE btnProtected' title='Admin - Cannot be deleted'> Protected</button>";
                     }
                     
                     echo "</div>";
                     echo "</td>";
                     echo "</tr>";
-                }
+                } }
             } else {
                 echo "<tr><td colspan='5' style='text-align: center; padding: 30px; color: #666;'> No users found</td></tr>";
             }
@@ -500,7 +512,7 @@ h3{
                 <label>User Role:</label>
                 <select name="edit_role" id="edit_role" required>
                     <option value="">Select Role</option>
-                    <option value="admin">Admin</option>
+                    <!-- <option value="admin">Admin</option> -->
                     <option value="librarian">Librarian</option>
                     <option value="student">Student</option>
                 </select>
@@ -539,7 +551,7 @@ h3{
             <label>User Role:</label>
             <select name="role" required>
                 <option value="">Select Role</option>
-                <option value="admin">Admin</option>
+                <!-- <option value="admin">Admin</option> -->
                 <option value="librarian">Librarian</option>
                 <option value="student">Student</option>
             </select>

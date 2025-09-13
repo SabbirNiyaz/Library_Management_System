@@ -48,7 +48,7 @@ if (!isset($_SESSION['email'])) {
          <!-- Stats -->
          <div class="stats">
             <div class="stat-card">
-               <div class="stat-number">1,247</div>
+               <div class="stat-number">1000</div>
                <div class="stat-label">Total Books</div>
             </div>
             <div class="stat-card">
