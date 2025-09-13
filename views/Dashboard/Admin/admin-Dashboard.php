@@ -239,48 +239,105 @@ if (!isset($_SESSION['email'])) {
             outline: none;
             box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
         }
-        
-        .header-title {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        
-        .header-title h2 {
-            color: #4a90e2;
-            margin: 0;
-            font-size: 24px;
-        }
-        
-        .stats-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .stat-card {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        
-        .stat-number {
-            font-size: 24px;
-            font-weight: bold;
-            color: #4a90e2;
-        }
-        
-        .stat-label {
-            color: #666;
-            font-size: 14px;
-            margin-top: 5px;
-        }
+
+        /* Add User Form */
+        /* Form container */
+#userForm {
+    width: 50%;
+    height: 50%;
+    margin: 30px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+h3{
+    color:green;
+    margin-bottom:10px; 
+}
+
+/* Rows layout */
+.form-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+/* Each field container */
+.form-row > div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Labels */
+#userForm label {
+    font-weight: bold;
+    margin-bottom: 6px;
+    color: #333;
+}
+
+/* Inputs & select */
+#userForm input[type="text"],
+#userForm input[type="email"],
+#userForm input[type="password"],
+#userForm select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+/* Focus effect */
+#userForm input:focus,
+#userForm select:focus {
+    border-color: #007BFF;
+    outline: none;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.2);
+}
+
+/* Error message */
+.error {
+    color: red;
+    font-size: 13px;
+    margin-top: 4px;
+    margin-bottom: 6px;
+    height: 16px; /* Reserve space so layout doesn’t jump */
+}
+
+/* Submit and back buttons */
+#userForm input[type="submit"],
+#userForm button {
+    padding: 10px 20px;
+    display:block;
+    margin: 0 auto;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+/* Add User button */
+#userForm input[type="submit"] {
+    background: #28a745;
+    color: white;
+    transition: background 0.3s;
+}
+#userForm input[type="submit"]:hover {
+    background: #218838;
+}
+
+/* Back button */
+#userForm button {
+    background: #6c757d;
+    color: white;
+    transition: background 0.3s;
+}
+#userForm button:hover {
+    background: #5a6268;
+}
+
     </style>
 </head>
 <body>
@@ -347,7 +404,14 @@ if (!isset($_SESSION['email'])) {
     <!-- User List -->
     <div id="userSection" style="height: 80vh; overflow-y: auto;">
         <div>
-            <button class="btn" onclick="window.location.href='../../Authentication/addUsers-Admin.php'" style="margin-bottom: 15px;">
+            <!-- <button class="btn" 
+            onclick="window.location.href='../../Authentication/addUsers-Admin.php'" 
+            style="margin-bottom: 15px;">
+                Add New User
+            </button> -->
+            <button class="btn" 
+            onclick="showRegisterForm()" 
+            style="margin-bottom: 15px;">
                 Add New User
             </button>
         </div>
@@ -446,13 +510,47 @@ if (!isset($_SESSION['email'])) {
             <input type="submit" id="editUserBtn" value=" Update User">
         </form>
     </div>
+ </div>
 </div>
-
+<!-- Add User Form -->
+    <div class="form-container" id="addUserSection" style="display:none;">
+        <button class="logout-btn back-button" type="submit" onclick="showManageUsers()">Back</button>
+        <form action="" method="post" id="userForm">
+            <h3>Add New User</h3>
+    <div class="form-row">
+        <div>
+            <label>Full Name:</label>
+            <input type="text" name="name" placeholder="Enter full name" required>
+            <span class="error" id="nameError"></span>
+        </div>
+        <div>
+            <label>Email Address:</label>
+            <input type="email" name="email" placeholder="Enter email address" required>
+            <span class="error" id="emailError"></span>
+        </div>
     </div>
+    <div class="form-row">
+        <div>
+            <label>Password:</label>
+            <input type="password" name="password" placeholder="Enter password" required minlength="6">
+            <span class="error" id="passwordError"></span>
+        </div>
+        <div>
+            <label>User Role:</label>
+            <select name="role" required>
+                <option value="">Select Role</option>
+                <option value="admin">Admin</option>
+                <option value="librarian">Librarian</option>
+                <option value="student">Student</option>
+            </select>
+            <span class="error" id="roleError"></span>
+        </div>
+    </div>
+    <input type="submit" value="Add">
+</form>
+    </div>
+    
 </div>
-
-
-           
 
 
       <!-- Settings Section -->
@@ -678,7 +776,7 @@ function showRegisterForm() {
         }
         
         function deleteUser(id, name) {
-            if (confirm(' Are you sure you want to delete this user?\n\nName: ' + name + '\n\nThis action cannot be undone!')) {
+            if (confirm(' Are you sure you want to delete this user?\n\nName: ' + name + '\n\nIf you click "Ok" then this action cannot be do!')) {
                 const form = document.createElement('form');
                 form.method = 'post';
                 form.innerHTML = '<input type="hidden" name="delete_id" value="' + id + '">';
@@ -796,6 +894,72 @@ function showRegisterForm() {
 });
 
     console.log('User Management System Loaded Successfully!');
+
+// Add user form
+document.getElementById('userForm').addEventListener('submit', function(e) {
+    let isValid = true;
+
+    // Get values
+    const name = document.getElementsByName('name')[0].value.trim();
+    const email = document.getElementsByName('email')[0].value.trim();
+    const password = document.getElementsByName('password')[0].value;
+    const role = document.getElementsByName('role')[0].value;
+
+    // Get error spans
+    const nameError = document.getElementById('nameError');
+    const emailError = document.getElementById('emailError');
+    const passwordError = document.getElementById('passwordError');
+    const roleError = document.getElementById('roleError');
+
+    // Clear old errors
+    nameError.innerText = '';
+    emailError.innerText = '';
+    passwordError.innerText = '';
+    roleError.innerText = '';
+
+    // Name validation
+    if (name === "") {
+        nameError.innerText = '*Name cannot be empty.';
+        isValid = false;
+    } else if (!/^[a-zA-Z\s]{2,}$/.test(name)) {
+        nameError.innerText = '*Please enter a valid name (at least 2 letters, only letters & spaces).';
+        isValid = false;
+    }
+
+    // Email validation
+    if (email === "") {
+        emailError.innerText = '*Email cannot be empty.';
+        isValid = false;
+    } else if (!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(email)) {
+        emailError.innerText = '*Please enter a valid email address.';
+        isValid = false;
+    }
+
+    // Password validation
+    if (password === "") {
+        passwordError.innerText = '*Password cannot be empty.';
+        isValid = false;
+    } else if (password.length < 6) {
+        passwordError.innerText = '*Password must be at least 6 characters long.';
+        isValid = false;
+    } else if (!/[A-Z]/.test(password) || !/[a-z]/.test(password) || !/[0-9]/.test(password) || !/[\W_]/.test(password)) {
+        passwordError.innerText = '*Password must contain uppercase, lowercase, digit, and special character.';
+        isValid = false;
+    }
+
+    // Role validation
+    if (role === "") {
+        roleError.innerText = '*Please select a role.';
+        isValid = false;
+    }
+
+    // Stop form submission if invalid
+    if (!isValid) {
+        e.preventDefault();
+    }
+});
+
+console.log('Add Users Successfully!');
     </script>
 
 </body>
