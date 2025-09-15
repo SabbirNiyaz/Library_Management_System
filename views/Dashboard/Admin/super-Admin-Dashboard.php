@@ -47,8 +47,12 @@ if (!isset($_SESSION['email'])) {
             cursor: pointer;
             transition: all 0.2s ease;
         }
+
+        .btn-search:hover {
+            background-color: #357abd;
+        }
         .btn-reset {
-            background-color: #E43636;
+            background-color: #dc3545;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -58,10 +62,8 @@ if (!isset($_SESSION['email'])) {
             cursor: pointer;
             transition: all 0.2s ease;
         }
-        
-        .btn-search:hover {
-            background-color: #357abd;
-            transform: translateY(-1px);
+        .btn-reset:hover {
+            background-color: #c82333;
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
         

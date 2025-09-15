@@ -49,12 +49,26 @@ if (!isset($_SESSION['email'])) {
             transition: all 0.2s ease;
         }
         
+                
         .btn-search:hover {
             background-color: #357abd;
-            transform: translateY(-1px);
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
-        
+        .btn-reset {
+            background-color: #dc3545;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .btn-reset:hover {
+            background-color: #c82333;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
         table {
             width: 100%;
             border-collapse: collapse;
@@ -422,12 +436,33 @@ h3{
 
         <h2 style="margin-bottom: 10px;">Manage Users</h2>
 
-            <!-- Search Container -->
-    <div class="search-container">
-        <input type="text" class="search-input" id="searchInput" placeholder="Search by name, email, or role...">
-        <button class="btn-search" onclick="searchTable()"> Search</button>
+               <!-- Wrapper -->
+<div style="display: flex; justify-content: space-between; align-items: center; margin: 15px 0;">
+
+    <!-- Search Container -->
+    <div class="search-container" style="display: flex; align-items: center; gap: 10px;">
+        <input type="text" class="search-input" id="searchInput" 
+               placeholder="Search by name, email, or role..." 
+               style="padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+        <button class="btn-search" onclick="searchTable()" 
+                style="padding: 8px 12px;">Search</button>
     </div>
 
+    <!-- Filter Container -->
+    <div class="filter-container" style="display: flex; align-items: center; gap: 10px;">
+        <label for="roleFilter" style="font-weight: bold;">Filter by Role:</label>
+        <select id="roleFilter" class="role-dropdown" onchange="filterByRole()" 
+                style="padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px; background: white;">
+            <option value="all">All Users</option>
+            <option value="student">Student</option>
+            <!-- <option value="librarian">Librarian</option>
+            <option value="admin">Admin</option> -->
+        </select>
+        <button class="btn-reset" onclick="resetFilters()" 
+                style="padding: 8px 12px;">Reset</button>
+    </div>
+
+</div>
     <!-- Users Table -->
     <table>
         <thead>
@@ -971,5 +1006,87 @@ document.getElementById('userForm').addEventListener('submit', function(e) {
 
 console.log('Add Users Successfully!');
     </script>
+        <!-- Dropdown bar -->
+    <script>
+// Function to filter table by role
+function filterByRole() {
+    const selectedRole = document.getElementById('roleFilter').value;
+    const tableRows = document.querySelectorAll('#tableBody .user-row');
+    
+    tableRows.forEach(row => {
+        const rowRole = row.getAttribute('data-role');
+        
+        if (selectedRole === 'all' || rowRole === selectedRole) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+    
+    // Update table display message if no rows are visible
+    updateTableMessage();
+}
+
+// Function to reset all filters
+function resetFilters() {
+    document.getElementById('roleFilter').value = 'all';
+    document.getElementById('searchInput').value = '';
+    
+    const tableRows = document.querySelectorAll('#tableBody .user-row');
+    tableRows.forEach(row => {
+        row.style.display = '';
+    });
+    
+    updateTableMessage();
+}
+
+// Function to update table message when no results found
+function updateTableMessage() {
+    const visibleRows = document.querySelectorAll('#tableBody .user-row:not([style*="display: none"])');
+    const messageRow = document.querySelector('#tableBody .no-results-message');
+    
+    if (visibleRows.length === 0) {
+        if (!messageRow) {
+            const tbody = document.getElementById('tableBody');
+            const newRow = document.createElement('tr');
+            newRow.className = 'no-results-message';
+            newRow.innerHTML = '<td colspan="5" style="text-align: center; padding: 30px; color: #666;">No users found matching the selected criteria</td>';
+            tbody.appendChild(newRow);
+        }
+    } else {
+        if (messageRow) {
+            messageRow.remove();
+        }
+    }
+}
+
+// Enhanced search function that works with role filter
+function searchTable() {
+    const searchInput = document.getElementById('searchInput').value.toLowerCase();
+    const selectedRole = document.getElementById('roleFilter').value;
+    const tableRows = document.querySelectorAll('#tableBody .user-row');
+    
+    tableRows.forEach(row => {
+        const name = row.cells[1].textContent.toLowerCase();
+        const email = row.cells[2].textContent.toLowerCase();
+        const role = row.getAttribute('data-role');
+        const roleText = row.cells[3].textContent.toLowerCase();
+        
+        const matchesSearch = name.includes(searchInput) || 
+                            email.includes(searchInput) || 
+                            roleText.includes(searchInput);
+        
+        const matchesRole = selectedRole === 'all' || role === selectedRole;
+        
+        if (matchesSearch && matchesRole) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+    
+    updateTableMessage();
+}
+</script>  
 </body>
 </html>
