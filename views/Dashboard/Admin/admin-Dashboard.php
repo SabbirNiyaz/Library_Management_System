@@ -417,6 +417,8 @@ h3{
         <!-- Books Management Section -->
         <div id="books" class="content-section">
             <!-- ... (your existing code for books management section) ... -->
+             
+
         </div>
 
 <!-- Manage Users & Fines Section -->
