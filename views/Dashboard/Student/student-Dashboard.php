@@ -87,6 +87,7 @@ if (!isset($_SESSION['email'])) {
 /* Search Input */
 #allBooks .search-box {
     flex: 1 1 200px;
+    margin:0 auto;
     padding: 8px 12px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -182,6 +183,21 @@ if (!isset($_SESSION['email'])) {
     color: #777;
     padding: 40px 0;
 }
+/* Rest select */
+.reset-btn {
+    padding: 8px 16px;
+    background-color: #6c757d;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+.reset-btn:hover {
+    background-color: #5a6268;
+}
+
 
       </style>
 
@@ -258,9 +274,10 @@ if (!isset($_SESSION['email'])) {
                 </option>
             <?php endforeach; ?>
         </select>
+        <!-- Reset Button -->
+    <button type="button" class="reset-btn">Reset</button>
     </form>
                 
-            </form>
             <div class="section2">
             <!-- Books Display -->
             <div class="books-grid">
@@ -548,10 +565,21 @@ document.addEventListener("DOMContentLoaded", () => {
             card.style.display = (matchesSearch && matchesCategory) ? "block" : "none";
         });
     }
+    const resetBtn = document.querySelector(".reset-btn");
+
+resetBtn.addEventListener("click", () => {
+    searchInput.value = "";         // Clear search box
+    categorySelect.value = "";      // Reset select
+    bookCards.forEach(card => {
+        card.style.display = "block"; // Show all books
+    });
+});
+
 
     searchInput.addEventListener("input", filterBooks);
     categorySelect.addEventListener("change", filterBooks);
 });
+
 </script>
 
       <!-- view books -->
