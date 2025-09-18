@@ -365,7 +365,7 @@ h3{
             <div class="admin-info">
                 <div class="admin-avatar">A</div>
                 <div>
-                    <strong><?= $_SESSION['name']; ?></strong><br>
+                    <strong>Welcome, <span style="color:#1B56FD"><?= $_SESSION['name']; ?></span>!</strong><br/>
                     <small>System Administrator</small>
                 </div>
                 <button class="logout-btn" 

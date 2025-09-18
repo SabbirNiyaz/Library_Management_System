@@ -212,8 +212,6 @@ if (!isset($_SESSION['email'])) {
             </div>
             <div class="user-info">
                <div class="student-avatar" 
-               onclick="viewProfile()"
-
             style=" width: 45px;
             height: 45px;
             background: #3D74B6;
@@ -222,14 +220,21 @@ if (!isset($_SESSION['email'])) {
             align-items: center;
             justify-content: center;
             color: white;
-            font-weight: bold;
-            cursor: pointer;" 
-
-               >S</div>
+            font-weight: bold;" 
+            >S</div> 
                <div>
-                  <strong><?= $_SESSION['name']; ?></strong><br/>
+                  <strong>Welcome, <span style="color:#1B56FD"><?= $_SESSION['name']; ?></span>!</strong><br/>
                   <small><?= $_SESSION['email']; ?></small>
                </div>
+               <img src="setting.png" alt="" style=" width: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;" 
+            onclick="viewProfile()">
                <button class="logout-btn" onclick="window.location.href='../../Authentication/logout.php'">Logout</button>
             </div>
          </div>
@@ -368,7 +373,6 @@ if (!isset($_SESSION['email'])) {
                            type="text"
                            id="name"
                            placeholder="Enter your name"
-                           required
                         />
                      </div>
                      <div class="error" id="nameError"></div>
@@ -378,7 +382,6 @@ if (!isset($_SESSION['email'])) {
                            type="password"
                            id="oldPassword"
                            placeholder="Enter your old password"
-                           required
                         />
                      </div>
                      <div class="error" id="oldPasswordError"></div>
@@ -388,7 +391,7 @@ if (!isset($_SESSION['email'])) {
                            type="password"
                            id="newPassword"
                            placeholder="Enter a new password"
-                           required
+                           
                         />
                      </div>
                      <div class="error" id="newPasswordError"></div>
@@ -398,7 +401,7 @@ if (!isset($_SESSION['email'])) {
                            type="password"
                            id="confirmPassword"
                            placeholder="Confirm password"
-                           required
+                           
                         />
                      </div>
                      <div class="error" id="confirmPasswordError"></div>
@@ -429,7 +432,7 @@ if (!isset($_SESSION['email'])) {
                            type="text"
                            id="newName"
                            placeholder="Enter your new full name"
-                           required
+                           
                         />
                      </div>
                      <div class="error" id="newNameError"></div>
@@ -439,7 +442,7 @@ if (!isset($_SESSION['email'])) {
                            type="password"
                            id="password"
                            placeholder="Enter your password"
-                           required
+                          
                         />
                      </div>
                      <div class="error" id="passwordError"></div>
@@ -470,7 +473,7 @@ if (!isset($_SESSION['email'])) {
                            type="password"
                            id="currentPassword"
                            placeholder="Enter your current password"
-                           required
+                          
                         />
                      </div>
                      <div class="error" id="currentPasswordError"></div>
@@ -480,7 +483,7 @@ if (!isset($_SESSION['email'])) {
                            type="password"
                            id="resetNewPassword"
                            placeholder="Enter your new password"
-                           required
+                           
                         />
                      </div>
                      <div class="error" id="newPasswordError"></div>
@@ -490,7 +493,7 @@ if (!isset($_SESSION['email'])) {
                            type="password"
                            id="resetConfirmPassword"
                            placeholder="Confirm your new password"
-                           required
+                           
                         />
                         <div class="error" id="resetConfirmPasswordError"></div>
                      </div>

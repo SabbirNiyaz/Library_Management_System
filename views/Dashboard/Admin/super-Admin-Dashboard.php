@@ -364,7 +364,7 @@ h3{
             <div class="admin-info">
                 <div class="admin-avatar">SA</div>
                 <div>
-                    <strong><?= $_SESSION['name']; ?></strong><br>
+                    <strong>Welcome, <span style="color:#1B56FD"><?= $_SESSION['name']; ?></span>!</strong><br/>
                     <small><strong style="color: #DC3C22;">Super</strong> Administrator</small>
                 </div>
                 <button class="logout-btn" 
@@ -380,6 +380,8 @@ h3{
         $total_admins = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM all_users WHERE role='admin'"));
         $total_librarians = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM all_users WHERE role='librarian'"));
         $total_students = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM all_users WHERE role='student'"));
+
+        $total_books = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM books WHERE id"));
         ?>
             <div class="stat-card users">
                 <div class="stat-number"><?php echo $total_users;?></div>
@@ -398,7 +400,7 @@ h3{
                 <div class="stat-label">Total Admins</div>
             </div>
             <div class="stat-card books">
-                <div class="stat-number">1000</div>
+                <div class="stat-number"><?php echo $total_books;?></div>
                 <div class="stat-label">Total Books</div>
             </div>
         </div>

@@ -353,6 +353,72 @@ h3{
 #userForm button:hover {
     background: #5a6268;
 }
+/* add books */
+.addBookSection {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 15px;
+    background: #f4f4f4;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+    border: 1px solid #ddd;
+}
+
+.addBookSection h3 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* Row layout */
+.form-row-ab {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 12px;
+}
+
+.form-row-ab div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Labels */
+.addBookSection label {
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #444;
+}
+
+/* Inputs */
+.addBookSection input[type="text"],
+.addBookSection select,
+.addBookSection input[type="number"] {
+    padding: 8px;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Button */
+.addBookSection input[type="submit"] {
+    width: 50%;
+    display:block;
+    margin:15px auto 5px auto;
+    padding: 10px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.addBookSection input[type="submit"]:hover {
+    background: #0056b3;
+}
+
 
     </style>
 </head>
@@ -367,7 +433,7 @@ h3{
             <div class="librarian-info">
                 <div class="librarian-avatar">L</div>
                 <div>
-                    <strong><?= $_SESSION['name']; ?></strong><br>
+                    <strong>Welcome, <span style="color:#1B56FD"><?= $_SESSION['name']; ?></span>!</strong><br/>
                     <small>Senior Librarian</small>
                 </div>
                 <button class="logout-btn" onclick="window.location.href='../../Authentication/logout.php'">Logout</button>
@@ -379,13 +445,14 @@ h3{
         <?php
         // Get user and  book statistics
         $total_students = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM all_users WHERE role='student'"));
+        $total_books = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM books WHERE id"));
         ?>
             <div class="stat-card manageUsers">
                 <div class="stat-number" id="manageUsersNumber"><?php echo $total_students?> </div>
                 <div class="stat-label">Total Students</div>
             </div>
             <div class="stat-card books">
-                <div class="stat-number" id="totalBooks">1,000</div>
+                <div class="stat-number" id="totalBooks"><?php echo $total_books?></div>
                 <div class="stat-label">Total Books</div>
             </div>
             <div class="stat-card issued">
@@ -450,10 +517,10 @@ h3{
                     <select id="categoryFilter" class="category-dropdown" onchange="filterByCategory()" 
                             style="padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px; background: white;">
                         <option value="all">All Books</option>
-                        <option value="fiction">Fiction</option>
-                        <option value="nonfiction">Non-Fiction</option>
-                        <option value="science">Science</option>
-                        <option value="history">History</option>
+                        <option value="CS">CS</option>
+                        <option value="CSE">CSE</option>
+                        <option value="EEE">EEE</option>
+                        <option value="BBA">BBA</option>
                     </select>
                     <button class="btn-reset" onclick="resetBookFilters()" 
                             style="padding: 8px 12px;">Reset</button>
@@ -538,8 +605,10 @@ h3{
         <div class="form-container" id="addBookSection" style="display:none;">
             <button class="logout-btn back-button" type="button" onclick="showManageBooks()">Back</button>
             <form action="" method="post" id="bookForm">
-                <h3>Add New Book</h3>
-                <div class="form-row">
+
+<div class="addBookSection">
+                    <h3 style="color:green">Add New Book</h3>
+                <div class="form-row-ab">
                     <div>
                         <label>Title:</label>
                         <input type="text" name="title" placeholder="Enter book title" required>
@@ -549,10 +618,16 @@ h3{
                         <input type="text" name="author" placeholder="Enter author name" required>
                     </div>
                 </div>
-                <div class="form-row">
+                <div class="form-row-ab">
                     <div>
                         <label>Category:</label>
-                        <input type="text" name="category" placeholder="Enter category" required>
+                        <!-- <input type="text" name="category" placeholder="Enter category" required> -->
+                        <select name="category" id="" required>
+                            <option value="CS">CS</option>
+                            <option value="CSE">CSE</option>
+                            <option value="EEE">EEE</option>
+                            <option value="BBA">BBA</option>
+                        </select>
                     </div>
                     <div>
                         <label>Available Copies:</label>
@@ -561,6 +636,7 @@ h3{
                 </div>
                 <input type="submit" value="Add Book">
             </form>
+</div>
         </div>            
 
         </div>
