@@ -655,7 +655,6 @@ include '../../Authentication/settings.php';
                     id="name"
                     name="name"
                     placeholder="Enter your name"
-                    value="<?php echo htmlspecialchars($current_user['name']); ?>"
                     required
                 />
                 <div class="error" id="nameError"></div>

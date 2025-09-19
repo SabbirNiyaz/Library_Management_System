@@ -546,6 +546,82 @@ if (!isset($_SESSION['email'])) {
 
       <script src="../../assets/app/dashboard-Script/student-Script.js"></script>
 
+      <!-- settings -->
+       <script>
+         // edit profile
+         document.getElementById("updateProfileForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const oldPassword = document.getElementById("oldPassword").value;
+    const newPassword = document.getElementById("newPassword").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
+
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("oldPassword", oldPassword);
+    formData.append("newPassword", newPassword);
+    formData.append("confirmPassword", confirmPassword);
+
+    fetch("../../Authentication/update_profile.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            alert("Profile updated successfully!");
+        } else {
+            alert(data.message || "Update failed!");
+        }
+    });
+});
+
+// change name
+document.getElementById("changeNameForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const newName = document.getElementById("newName").value;
+    const password = document.getElementById("password").value;
+
+    const formData = new FormData();
+    formData.append("newName", newName);
+    formData.append("password", password);
+
+    fetch("../../Authentication/change_name.php", {
+        method: "POST",
+        body: formData,
+        credentials: "include"
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert(data.message);
+    });
+});
+
+// reset password
+document.getElementById("resetPasswordForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const currentPassword = document.getElementById("currentPassword").value;
+    const resetNewPassword = document.getElementById("resetNewPassword").value;
+    const resetConfirmPassword = document.getElementById("resetConfirmPassword").value;
+
+    const formData = new FormData();
+    formData.append("currentPassword", currentPassword);
+    formData.append("resetNewPassword", resetNewPassword);
+    formData.append("resetConfirmPassword", resetConfirmPassword);
+
+    fetch("../../Authentication/reset_password.php", {
+        method: "POST",
+        body: formData,
+        credentials: "include"
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert(data.message);
+    });
+});
+       </script>
+
       <!-- JS Live Filtering -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
